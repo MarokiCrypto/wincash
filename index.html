@@ -23,6 +23,7 @@
   }
   a{color:inherit;text-decoration:none}
 
+  /* NAV */
   .nav{position:sticky;top:0;z-index:50;background:#0c1222cc;backdrop-filter:blur(8px);border-bottom:1px solid #151a25}
   .nav-inner{max-width:980px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:10px 14px}
   .brand{display:flex;align-items:center;gap:10px}
@@ -32,8 +33,10 @@
   .cta{padding:10px 16px;border:none;border-radius:999px;color:#0b1020;font-weight:800;cursor:pointer;background:linear-gradient(90deg,var(--grad1),var(--grad2),var(--grad3),var(--grad4));box-shadow:0 8px 22px rgba(138,86,240,.25)}
   .cta:active{transform:scale(.98)}
 
+  /* WRAP */
   .wrap{max-width:980px;margin:0 auto;padding:18px 14px 90px}
 
+  /* HERO */
   .hero{margin:14px 0;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
   .hero-top{padding:26px;background:linear-gradient(135deg,#0f1320,#0f1424)}
   .title{font-size:22px;line-height:1.35;margin:0 0 8px}
@@ -44,6 +47,7 @@
   .badge{font-size:12px;border:1px solid var(--line);border-radius:999px;padding:6px 10px;background:#10162a;color:#cbd5e1}
   .hero-bottom{height:5px;background:linear-gradient(90deg,var(--grad1),var(--grad2),var(--grad3),var(--grad4))}
 
+  /* GRID */
   .section{margin:22px 0}
   .section h3{margin:0 0 12px;font-size:18px}
   .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
@@ -56,6 +60,7 @@
   .label{margin-top:4px;font-weight:800;font-size:13px}
   .muted{font-size:12px;color:var(--muted)}
 
+  /* STEPS / TRUST */
   .steps{display:grid;gap:10px}
   @media(min-width:640px){.steps{grid-template-columns:repeat(4,1fr)}}
   .step{background:#0f1426;border:1px dashed #2b3342;border-radius:14px;padding:12px}
@@ -66,6 +71,7 @@
   .trust-line::after{content:"";position:absolute;inset:0;width:38%;background:linear-gradient(90deg,rgba(34,197,94,.7),rgba(79,106,242,.7));animation:shimmer 3.2s ease infinite}
   @keyframes shimmer{0%{transform:translateX(-120%)}100%{transform:translateX(260%)}}
 
+  /* MODAL */
   .overlay{position:fixed;inset:0;background:rgba(4,6,12,.6);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;z-index:80}
   .overlay.show{display:flex}
   .sheet{width:min(620px,92vw);background:#0f1426;border-radius:18px;border:1px solid var(--line);box-shadow:var(--shadow);overflow:hidden}
@@ -85,116 +91,63 @@
   .btn.loading .waves span:nth-child(5){animation-delay:.4s}
   @keyframes wave{0%{height:6px}50%{height:22px}100%{height:6px}}
   .confirm{display:none;padding:12px;border:1px solid #14532d;background:#052e1b;border-radius:12px;color:#a7f3d0;margin-top:10px}
-
-  .pay{width:min(760px,96vw)}
-  .banks{display:grid;gap:10px;margin-top:12px}
-  @media(min-width:560px){.banks{grid-template-columns:repeat(3,1fr)}}
-  .bank{background:#10162a;border:1px solid #2b3342;border-radius:12px;padding:12px;text-align:center;cursor:pointer}
-  .note{font-size:12px;color:#fca5a5;margin:10px 0}
-  .copyline{margin:6px 0}
-  .hidden{display:none}
-
-  .footer{margin-top:18px;padding:16px;border-top:1px solid #151a25;color:#9CA3AF;font-size:12px;text-align:center}
 </style>
 </head>
 <body>
-<header class="nav">
-  <div class="nav-inner">
-    <div class="brand"><span class="logo-dot"></span><div class="brand-name">Win<b>Cash</b></div></div>
-    <button class="cta" onclick="document.getElementById('platforms').scrollIntoView({behavior:'smooth'})">ابدأ الآن</button>
-  </div>
-</header>
+<header class="nav"><div class="nav-inner"><div class="brand"><span class="logo-dot"></span><div class="brand-name">Win<b>Cash</b></div></div><button class="cta" onclick="document.getElementById('platforms').scrollIntoView({behavior:'smooth'})">ابدأ الآن</button></div></header>
 
 <main class="wrap">
-  <section class="hero">
-    <div class="hero-top">
-      <h1 class="title">شحن منصّاتك بسرعة وأمان — تصميم حديث يُوحي بالثقة</h1>
-      <p class="subtitle">اختر منصّتك، أدخل الـ ID، ادفع محليًا، ويتم التنفيذ خلال دقائق.</p>
-      <div class="hero-actions">
-        <button class="cta" onclick="document.getElementById('platforms').scrollIntoView({behavior:'smooth'})">اختَر المنصّة</button>
-        <button class="cta ghost" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">من نحن</button>
-      </div>
-      <div class="badges"><span class="badge">دعم فوري</span><span class="badge">تأكيد آلي</span><span class="badge">طرق دفع محلية</span><span class="badge">حماية بيانات</span></div>
-    </div>
-    <div class="hero-bottom"></div>
-  </section>
+  <section class="hero"><div class="hero-top"><h1 class="title">شحن منصّاتك بسرعة وأمان — تصميم حديث يُوحي بالثقة</h1><p class="subtitle">اختر منصّتك، أدخل الـ ID، ادفع محليًا، ويتم التنفيذ خلال دقائق مع متابعة فورية.</p><div class="hero-actions"><button class="cta" onclick="document.getElementById('platforms').scrollIntoView({behavior:'smooth'})">اختَر المنصّة</button><button class="cta ghost" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">من نحن</button></div><div class="badges"><span class="badge">دعم فوري</span><span class="badge">تأكيد آلي</span><span class="badge">طرق دفع محلية</span><span class="badge">حماية بيانات</span></div></div><div class="hero-bottom"></div></section>
 
   <section id="platforms" class="section"><h3>اختيار المنصّة</h3><div id="platformGrid" class="grid"></div></section>
 
-  <section class="section"><h3>كيف تتم العملية؟</h3>
-    <div class="steps"><div class="step">① اختيار المنصّة</div><div class="step">② إدخال الـ ID</div><div class="step">③ الدفع</div><div class="step">④ تنفيذ وتأكيد</div></div>
-  </section>
+  <section class="section"><h3>كيف تتم العملية؟</h3><div class="steps"><div class="step">① اختيار المنصّة</div><div class="step">② إدخال الـ ID</div><div class="step">③ الدفع</div><div class="step">④ تنفيذ وتأكيد</div></div></section>
 
-  <section class="section"><h3>عناصر الثقة</h3>
-    <div class="trust"><div class="trust-item"><strong>حماية وأمان</strong><div class="trust-line"></div></div><div class="trust-item"><strong>شفافية</strong><div class="trust-line"></div></div><div class="trust-item"><strong>دعم</strong><div class="trust-line"></div></div></div>
-  </section>
+  <section class="section"><h3>عناصر الثقة</h3><div class="trust"><div class="trust-item"><strong>حماية وأمان</strong><div class="trust-line"></div></div><div class="trust-item"><strong>شفافية</strong><div class="trust-line"></div></div><div class="trust-item"><strong>دعم</strong><div class="trust-line"></div></div></div></section>
 
   <section id="about" class="section"><h3>من نحن</h3><div class="faq"><p>WinCash خدمة شحن منصّات رقمية نركّز فيها على السرعة والوضوح والأمان، مع تجربة موبايل سلسة ودفع محلي وتأكيد فوري.</p></div></section>
 
-  <footer class="footer">©️ 2025 — WinCash.</footer>
+  <footer class="footer">© 2025 — WinCash.</footer>
 </main>
 
 <!-- Modal طلب -->
-<div class="overlay" id="modal"><div class="sheet">
-  <div class="sheet-head"><strong id="sheetTitle">طلب شحن</strong><button class="x" onclick="closeModal()">×</button></div>
-  <div class="sheet-body">
-    <form id="chargeForm">
-      <input type="hidden" id="platformInput">
-      <div class="field"><label>معرّف الحساب</label><input id="userId" required></div>
-      <div class="field"><label>المبلغ</label><input id="amount" type="number" required></div>
-      <button id="submitBtn" class="btn" type="submit"><span>تنفيذ الطلب</span><div class="waves"><span></span><span></span><span></span><span></span><span></span></div></button>
-      <div id="confirmBox" class="confirm">تم استلام طلبك! جارٍ المعالجة.</div>
-    </form>
-  </div>
-</div></div>
-
-<!-- Payment Sheet -->
-<div class="overlay" id="payOverlay"><div class="sheet pay">
-  <div class="sheet-head"><strong>إعادة تعبئة الحساب</strong><button class="x" onclick="closePay()">×</button></div>
-  <div class="sheet-body"><div class="banks" id="banksGrid"></div><div id="bankDetails" class="hidden"></div></div>
-</div></div>
+<div class="overlay" id="modal"><div class="sheet"><div class="sheet-head"><strong id="sheetTitle">طلب شحن</strong><button class="x" onclick="closeModal()">×</button></div><div class="sheet-body"><form id="chargeForm"><input type="hidden" id="platformInput"><div class="field"><label>معرّف الحساب</label><input id="userId" required></div><div class="field"><label>المبلغ</label><input id="amount" type="number" required></div><button id="submitBtn" class="btn" type="submit"><span>تنفيذ الطلب</span><div class="waves"><span></span><span></span><span></span><span></span><span></span></div></button><div id="confirmBox" class="confirm">تم استلام طلبك! جارٍ المعالجة.</div></form></div></div></div>
 
 <script>
 const platforms = [
-  {key:'22bet',name:'22Bet',tag:'22',grad:['#4f6af2','#8a56f0']},
-  {key:'melbet',name:'Melbet',tag:'MB',grad:['#dd2a7b','#8a56f0']},
-  {key:'linebet',name:'Linebet',tag:'LB',grad:['#f69c5e','#dd2a7b']},
-  {key:'1xbet',name:'1xBet',tag:'1X',grad:['#4f6af2','#58a6ff']},
-  {key:'megapari',name:'MegaPari',tag:'MP',grad:['#8a56f0','#4f6af2']},
-  {key:'mostbet',name:'Mostbet',tag:'MS',grad:['#dd2a7b','#f69c5e']},
-  {key:'betwinner',name:'Betwinner',tag:'BW',grad:['#34d399','#4f6af2']},
-  {key:'paripesa',name:'Paripesa',tag:'PP',grad:['#8a56f0','#dd2a7b']},
-  {key:'888starz',name:'888Starz',tag:'88',grad:['#f69c5e','#8a56f0']},
-  {key:'mystake',name:'MyStake',tag:'MS',grad:['#58a6ff','#4f6af2']},
-  {key:'stake',name:'Stake',tag:'SK',grad:['#4f6af2','#2dd4bf']},
-  {key:'xparibet',name:'Xparibet',tag:'XP',grad:['#dd2a7b','#4f6af2']}
+  {key:'22bet',    name:'22Bet',     tag:'22', grad:['#4f6af2','#8a56f0']},
+  {key:'melbet',   name:'Melbet',    tag:'MB', grad:['#dd2a7b','#8a56f0']},
+  {key:'linebet',  name:'Linebet',   tag:'LB', grad:['#f69c5e','#dd2a7b']},
+  {key:'1xbet',    name:'1xBet',     tag:'1X', grad:['#4f6af2','#58a6ff']},
+  {key:'megapari', name:'MegaPari',  tag:'MP', grad:['#8a56f0','#4f6af2']},
+  {key:'mostbet',  name:'Mostbet',   tag:'MS', grad:['#dd2a7b','#f69c5e']},
+  {key:'betwinner',name:'Betwinner', tag:'BW', grad:['#34d399','#4f6af2']},
+  {key:'paripesa', name:'Paripesa',  tag:'PP', grad:['#8a56f0','#dd2a7b']},
+  {key:'888starz', name:'888Starz',  tag:'88', grad:['#f69c5e','#8a56f0']},
+  {key:'mystake',  name:'MyStake',   tag:'MS', grad:['#58a6ff','#4f6af2']},
+  {key:'stake',    name:'Stake',     tag:'SK', grad:['#4f6af2','#2dd4bf']},
+  {key:'xparibet', name:'Xparibet',  tag:'XP', grad:['#dd2a7b','#4f6af2']}
 ];
 
 const grid=document.getElementById('platformGrid');
 function badgeIcon(p){const[c1,c2]=p.grad;return`<div class="icon" style="background:linear-gradient(120deg,${c1},${c2})"><span>${p.tag}</span></div>`;}
-platforms.forEach(p=>{
-  const card=document.createElement('button');
-  card.className='card';
-  card.innerHTML=`${badgeIcon(p)}<div class="label">${p.name}</div><div class="muted">شحن سريع</div>`;
-  card.onclick=()=>openModal(p.name,p.key);
-  grid.appendChild(card);
-});
+platforms.forEach(p=>{const card=document.createElement('button');card.className='card';card.innerHTML=${badgeIcon(p)}<div class="label">${p.name}</div><div class="muted">شحن سريع</div>;card.onclick=()=>openModal(p.name,p.key);grid.appendChild(card);});
 
 const modal=document.getElementById('modal');
-function openModal(n,k){
-  document.getElementById('sheetTitle').textContent=`طلب شحن — ${n}`;
-  document.getElementById('platformInput').value=k;
-  modal.classList.add('show');
-}
+function openModal(n,k){document.getElementById('sheetTitle').textContent=طلب شحن — ${n};document.getElementById('platformInput').value=k;modal.classList.add('show');}
 function closeModal(){modal.classList.remove('show');}
 modal.addEventListener('click',e=>{if(e.target===modal)closeModal()})
 
-const payOverlay=document.getElementById('payOverlay');
-function closePay(){payOverlay.classList.remove('show');}
-
-const banksGrid=document.getElementById('banksGrid');
-const bankDetails=document.getElementById('bankDetails');
-
-const BANK_DETAILS={
-  barid:{name:'AL BARID BANK',account:'10468669 1',holder:'AHMED PAY',motif:'Service',min:100,max:5000,note:'يرجى إدخال المبلغ بدون فاصلة ويجب إتمام التحويل خلال 10 دقائق.'},
-  cashplus:{name:'CASH PLUS',account:'0727258044',holder:'
+const form=document.getElementById('chargeForm');
+const submitBtn=document.getElementById('submitBtn');
+const confirmBox=document.getElementById('confirmBox');
+form.addEventListener('submit',async e=>{
+  e.preventDefault();
+  submitBtn.classList.add('loading');submitBtn.disabled=true;
+  await new Promise(r=>setTimeout(r,1300));
+  confirmBox.style.display='block';form.reset();
+  submitBtn.classList.remove('loading');submitBtn.disabled=false;
+});
+</script>
+</body>
+</html>
