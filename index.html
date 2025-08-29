@@ -200,11 +200,16 @@ METHODS.forEach(m=>{
 });
 
 function onSelectMethod(key){
+  banksGrid.style.display = "none"; // إخفاء البنوك
   bankDetails.classList.remove('hidden');
+
   if(BANK_DETAILS[key]){
     const info=BANK_DETAILS[key];
     bankDetails.innerHTML=`
-      <h3>${info.name}</h3>
+      <div class="sheet-head">
+        <button class="x" onclick="backToBanks()">🔙 رجوع</button>
+        <strong>${info.name}</strong>
+      </div>
       <div class="note">❗ ${info.note}</div>
       <div><strong>رقم الحساب:</strong> ${info.account}</div>
       <div><strong>الإسم:</strong> ${info.holder}</div>
@@ -215,7 +220,10 @@ function onSelectMethod(key){
       <button class="btn">تأكيد</button>`;
   } else {
     bankDetails.innerHTML=`
-      <h3>${key.toUpperCase()}</h3>
+      <div class="sheet-head">
+        <button class="x" onclick="backToBanks()">🔙 رجوع</button>
+        <strong>${key.toUpperCase()}</strong>
+      </div>
       <div class="note">لإتمام التحويل تواصل معنا عبر الواتساب.</div>
       <div class="field"><label>المبلغ</label><input type="number"></div>
       <div class="field"><label>صورة التحويل</label><input type="file"></div>
@@ -223,6 +231,11 @@ function onSelectMethod(key){
         <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt=""> تواصل عبر الواتساب
       </a>`;
   }
+}
+
+function backToBanks(){
+  bankDetails.classList.add('hidden');
+  banksGrid.style.display = "grid"; // إظهار اللائحة من جديد
 }
 </script>
 </body>
