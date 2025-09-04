@@ -14,129 +14,80 @@
   }
   *{box-sizing:border-box}html,body{height:100%}
   body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Tahoma,Arial,sans-serif;color:var(--ink);
-    background:radial-gradient(1200px 600px at 10% -200px, rgba(221,42,123,.18), transparent 60%),
-    radial-gradient(1200px 600px at 110% -240px, rgba(79,106,242,.18), transparent 60%),
-    linear-gradient(180deg,#0b1020,#0a0f1d 30%, #0b1020);}
+    background:#0b1020;}
   a{color:inherit;text-decoration:none}
 
-  /* NAV */
   .nav{position:sticky;top:0;z-index:50;background:#0c1222cc;backdrop-filter:blur(8px);border-bottom:1px solid #151a25}
   .nav-inner{max-width:980px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:10px 14px}
   .brand{display:flex;align-items:center;gap:10px}
   .logo-dot{width:26px;height:26px;border-radius:8px;background:conic-gradient(from 200deg,var(--grad1),var(--grad2),var(--grad3),var(--grad4),var(--grad1))}
   .brand-name{font-weight:900}
   .brand-name b{background:linear-gradient(90deg,var(--grad1),var(--grad2),var(--grad3),var(--grad4));-webkit-background-clip:text;color:transparent}
-  .cta{padding:10px 16px;border:none;border-radius:999px;color:#0b1020;font-weight:800;cursor:pointer;background:linear-gradient(90deg,var(--grad1),var(--grad2),var(--grad3),var(--grad4));box-shadow:0 8px 22px rgba(138,86,240,.25)}
+  .cta{padding:10px 16px;border:none;border-radius:999px;color:#0b1020;font-weight:800;cursor:pointer;background:linear-gradient(90deg,var(--grad1),var(--grad2),var(--grad3),var(--grad4))}
 
-  /* WRAP */
   .wrap{max-width:980px;margin:0 auto;padding:18px 14px 90px}
 
-  /* HERO */
   .hero{margin:14px 0;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
   .hero-top{padding:26px;background:linear-gradient(135deg,#0f1320,#0f1424)}
-  .title{font-size:22px;line-height:1.35;margin:0 0 8px}
+  .title{font-size:22px;margin:0 0 8px}
   .subtitle{color:var(--muted);font-size:14px}
   .hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
   .ghost{background:transparent;border:1px solid var(--line);color:#E5E7EB}
   .badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
-  .badge{position:relative;font-size:12px;border:1px solid var(--line);border-radius:999px;padding:6px 10px;background:#10162a;color:#cbd5e1;overflow:hidden}
-  .badge::after{content:"";position:absolute;inset:0;width:40%;background:linear-gradient(90deg,rgba(34,197,94,.4),rgba(79,106,242,.4));animation:shimmer 3.5s ease infinite}
-  .hero-bottom{height:5px;background:linear-gradient(90deg,var(--grad1),var(--grad2),var(--grad3),var(--grad4))}
+  .badge{font-size:12px;border:1px solid var(--line);border-radius:999px;padding:6px 10px;background:#10162a;color:#cbd5e1}
 
-  /* GRID */
   .section{margin:22px 0}
   .section h3{margin:0 0 12px;font-size:18px}
   .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
   @media(min-width:480px){.grid{grid-template-columns:repeat(3,1fr)}}
   @media(min-width:760px){.grid{grid-template-columns:repeat(4,1fr)}}
-  .card{background:#0f1426;border:1px solid var(--line);border-radius:16px;padding:12px;text-align:center;cursor:pointer;transition:.2s}
-  .card:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(0,0,0,.35)}
+  .card{background:#0f1426;border:1px solid var(--line);border-radius:16px;padding:12px;text-align:center;cursor:pointer}
+  .card:hover{transform:translateY(-2px)}
   .icon{width:34px;height:34px;border-radius:12px;display:inline-grid;place-items:center;margin:2px auto 6px}
   .icon span{font-weight:900;font-size:12px;color:#fff}
   .label{margin-top:4px;font-weight:800;font-size:13px}
   .muted{font-size:12px;color:var(--muted)}
 
-  /* FAQ / FOOTER */
   .faq{background:#0f1426;border:1px solid var(--line);border-radius:16px;padding:12px}
-  details{border:1px solid var(--line);border-radius:12px;padding:10px;margin:8px 0;background:#10162a}
-  summary{cursor:pointer;font-weight:800}
-  .footer{margin-top:18px;padding:16px;border-top:1px solid #151a25;color:#9CA3AF;font-size:12px}
+  .footer{margin-top:18px;padding:16px;border-top:1px solid #151a25;color:#9CA3AF;font-size:12px;text-align:center}
 
-  /* MODAL */
   .overlay{position:fixed;inset:0;background:rgba(4,6,12,.6);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;z-index:80}
   .overlay.show{display:flex}
-  .sheet{width:min(620px,92vw);background:#0f1426;border-radius:18px;border:1px solid var(--line);box-shadow:var(--shadow);overflow:hidden}
+  .sheet{width:min(620px,92vw);background:#0f1426;border-radius:18px;border:1px solid var(--line);overflow:hidden}
   .sheet-head{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--line)}
   .sheet-body{padding:14px 16px}
-  .x{border:none;background:transparent;font-size:22px;cursor:pointer;color:#cbd5e1}
   .field{display:grid;gap:6px;margin:10px 0}
-  .field input,.field select,.field textarea{width:100%;padding:12px;border:1px solid #2b3342;border-radius:12px;background:#0c1222;color:#e5e7eb}
-  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 16px;border:none;border-radius:12px;color:#0b1020;font-weight:900;background:linear-gradient(90deg,var(--grad1),var(--grad2),var(--grad3),var(--grad4));cursor:pointer;text-align:center;width:100%;margin-top:10px}
-  .btn img{width:20px;height:20px}
-  .confirm{display:none;padding:10px;margin-top:8px;background:#052e1b;border:1px solid #14532d;border-radius:10px;color:#a7f3d0}
-
-  /* IMAGE PREVIEW */
-  #imageBox{margin-top:10px;position:relative}
+  .field input{width:100%;padding:12px;border:1px solid #2b3342;border-radius:12px;background:#0c1222;color:#e5e7eb}
+  .btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 16px;border:none;border-radius:12px;color:#0b1020;font-weight:900;background:linear-gradient(90deg,var(--grad1),var(--grad2),var(--grad3),var(--grad4));cursor:pointer;width:100%;margin-top:10px}
   #imageBox img{max-width:100%;border-radius:12px;margin-top:6px}
   .delete-image-btn{position:absolute;top:6px;right:6px;background:#ef4444;color:#fff;border:none;border-radius:50%;width:28px;height:28px;cursor:pointer}
-
-  @keyframes shimmer{0%{transform:translateX(-120%)}100%{transform:translateX(260%)}}
 </style>
 </head>
 <body>
 <header class="nav"><div class="nav-inner"><div class="brand"><span class="logo-dot"></span><div class="brand-name">Win<b>Cash</b></div></div><button class="cta" onclick="document.getElementById('platforms').scrollIntoView({behavior:'smooth'})">ابدأ الآن</button></div></header>
+
 <main class="wrap">
-  <!-- HERO -->
   <section class="hero">
     <div class="hero-top">
-      <h1 class="title">شحن منصّاتك بسرعة وأمان — تصميم حديث يُوحي بالثقة</h1>
-      <p class="subtitle">اختر منصّتك، أدخل الـ ID، ادفع محليًا، ويتم التنفيذ خلال دقائق مع متابعة فورية.</p>
-      <div class="hero-actions">
-        <button class="cta" onclick="document.getElementById('platforms').scrollIntoView({behavior:'smooth'})">اختَر المنصّة</button>
-        <button class="cta ghost" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">من نحن</button>
-      </div>
-      <div class="badges">
-        <span class="badge">دعم فوري</span><span class="badge">تأكيد آلي</span><span class="badge">طرق دفع محلية</span><span class="badge">حماية بيانات</span>
-      </div>
+      <h1 class="title">شحن منصّاتك بسرعة وأمان</h1>
+      <p class="subtitle">اختر المنصة، أدخل الـ ID، ادفع محليًا، التنفيذ خلال دقائق.</p>
     </div>
-    <div class="hero-bottom"></div>
   </section>
 
-  <!-- PLATFORMS -->
   <section id="platforms" class="section"><h3>اختيار المنصّة</h3><div id="platformGrid" class="grid"></div></section>
-
-  <!-- HOW -->
-  <section class="section"><h3>كيف تتم العملية؟</h3>
-    <div class="steps">
-      <div class="step"><div>① اختيار المنصّة</div><div class="muted">اختر من القائمة</div></div>
-      <div class="step"><div>② إدخال الـ ID</div><div class="muted">اكتب معرفك</div></div>
-      <div class="step"><div>③ الدفع</div><div class="muted">حوّل المبلغ</div></div>
-      <div class="step"><div>④ تنفيذ وتأكيد</div><div class="muted">تأكيد فوري</div></div>
-    </div>
-  </section>
-
-  <!-- ABOUT -->
-  <section id="about" class="section"><h3>من نحن</h3>
-    <div class="faq"><p>WinCash خدمة شحن منصّات رقمية نركّز فيها على السرعة والوضوح والأمان، مع تجربة موبايل سلسة ودفع محلي وتأكيد فوري.</p></div>
-  </section>
-
-  <footer class="footer">©️ 2025 — WinCash</footer>
+  <footer class="footer">© 2025 — WinCash</footer>
 </main>
 
 <!-- Modal شحن -->
 <div class="overlay" id="modal">
   <div class="sheet">
-    <div class="sheet-head">
-      <strong id="sheetTitle">طلب شحن</strong>
-      <button class="x" onclick="closeModal()">×</button>
-    </div>
+    <div class="sheet-head"><strong id="sheetTitle">طلب شحن</strong><button class="x" onclick="closeModal()">×</button></div>
     <div class="sheet-body">
       <form id="chargeForm">
         <input type="hidden" id="platformInput">
         <div class="field"><label>معرّف الحساب</label><input id="userId" required></div>
         <div class="field"><label>المبلغ</label><input id="amount" type="number" required></div>
-        <button id="submitBtn" class="btn" type="submit"><span>تنفيذ الطلب</span></button>
-        <div id="confirmBox" class="confirm">تم استلام طلبك! جارٍ المعالجة.</div>
+        <button class="btn" type="submit">تنفيذ الطلب</button>
       </form>
     </div>
   </div>
@@ -145,138 +96,89 @@
 <!-- Modal دفع -->
 <div class="overlay" id="payOverlay">
   <div class="sheet">
-    <div class="sheet-head">
-      <strong>إعادة تعبئة الحساب</strong>
-      <button class="x" onclick="closePay()">×</button>
-    </div>
+    <div class="sheet-head"><strong>إعادة تعبئة الحساب</strong><button class="x" onclick="closePay()">×</button></div>
     <div class="sheet-body">
       <form id="transferForm">
+        <input type="hidden" id="platformSend">
         <div class="field"><label>المبلغ</label><input id="amountPay" type="number" required></div>
         <div class="field"><label>الإسم الكامل</label><input id="fullname" type="text" required></div>
         <div class="field"><label>صورة التحويل</label><input id="proof" type="file" accept="image/*" required></div>
         <div id="imageBox"></div>
         <button id="submitBtnPay" class="btn" type="submit">تأكيد التحويل</button>
       </form>
-      <div id="waveLoader" style="display:none;justify-content:center;align-items:center;margin-top:10px">⏳ جاري المعالجة...</div>
+      <div id="waveLoader" style="display:none;text-align:center;margin-top:10px">⏳ جاري المعالجة...</div>
     </div>
   </div>
 </div>
 
 <script>
-/* المنصات */
 const platforms=[
-  {key:'22bet',name:'22Bet',tag:'22',grad:['#4f6af2','#8a56f0']},
-  {key:'melbet',name:'Melbet',tag:'MB',grad:['#dd2a7b','#8a56f0']},
-  {key:'linebet',name:'Linebet',tag:'LB',grad:['#f69c5e','#dd2a7b']},
   {key:'1xbet',name:'1xBet',tag:'1X',grad:['#4f6af2','#58a6ff']},
-  {key:'megapari',name:'MegaPari',tag:'MP',grad:['#8a56f0','#4f6af2']},
-  {key:'mostbet',name:'Mostbet',tag:'MS',grad:['#dd2a7b','#f69c5e']},
-  {key:'betwinner',name:'Betwinner',tag:'BW',grad:['#34d399','#4f6af2']},
-  {key:'paripesa',name:'Paripesa',tag:'PP',grad:['#8a56f0','#dd2a7b']},
-  {key:'888starz',name:'888Starz',tag:'88',grad:['#f69c5e','#8a56f0']},
-  {key:'mystake',name:'MyStake',tag:'MS',grad:['#58a6ff','#4f6af2']},
-  {key:'stake',name:'Stake',tag:'SK',grad:['#4f6af2','#2dd4bf']},
-  {key:'xparibet',name:'Xparibet',tag:'XP',grad:['#dd2a7b','#4f6af2']}
+  {key:'melbet',name:'Melbet',tag:'MB',grad:['#dd2a7b','#8a56f0']},
+  {key:'linebet',name:'Linebet',tag:'LB',grad:['#f69c5e','#dd2a7b']}
 ];
 const grid=document.getElementById('platformGrid');
 function badgeIcon(p){const[c1,c2]=p.grad;return`<div class="icon" style="background:linear-gradient(120deg,${c1},${c2})"><span>${p.tag}</span></div>`;}
 platforms.forEach(p=>{const card=document.createElement('button');card.className='card';card.innerHTML=`${badgeIcon(p)}<div class="label">${p.name}</div><div class="muted">شحن سريع</div>`;card.onclick=()=>openModal(p.name,p.key);grid.appendChild(card);});
 
-/* مودال شحن */
-const modal=document.getElementById('modal');
+const modal=document.getElementById('modal');const payOverlay=document.getElementById('payOverlay');
 function openModal(n,k){document.getElementById('sheetTitle').textContent=`طلب شحن — ${n}`;document.getElementById('platformInput').value=k;modal.classList.add('show');}
 function closeModal(){modal.classList.remove('show');}
-modal.addEventListener('click',e=>{if(e.target===modal)closeModal()})
-
-/* فورم شحن */
-const form=document.getElementById('chargeForm');
-const confirmBox=document.getElementById('confirmBox');
-form.addEventListener('submit',e=>{
-  e.preventDefault();
-  confirmBox.style.display='block';
-  modal.classList.remove('show');
-  payOverlay.classList.add('show');
-});
-
-/* مودال دفع */
-const payOverlay=document.getElementById('payOverlay');
 function closePay(){payOverlay.classList.remove('show');}
 
-/* سكريبت التخزين الجديد */
-document.getElementById("fullname").addEventListener("input",function(){this.value=this.value.replace(/[^a-zA-Z\u0600-\u06FF\s]/g,'');});
+document.getElementById("chargeForm").onsubmit=function(e){
+  e.preventDefault();
+  document.getElementById("platformSend").value=document.getElementById("platformInput").value;
+  modal.classList.remove("show");payOverlay.classList.add("show");
+};
 
 document.getElementById("proof").addEventListener("change",function(){
-  const imageBox=document.getElementById("imageBox");
-  const file=this.files[0];
-  if(!file)return;
-  imageBox.innerHTML="";
-  const reader=new FileReader();
-  reader.onload=function(e){
-    const img=document.createElement("img");
-    img.src=e.target.result;
-    imageBox.appendChild(img);
-    const delBtn=document.createElement("button");
-    delBtn.className="delete-image-btn";
-    delBtn.innerHTML="×";
+  const imageBox=document.getElementById("imageBox");imageBox.innerHTML="";
+  const file=this.files[0];if(!file)return;
+  const reader=new FileReader();reader.onload=function(e){
+    const img=document.createElement("img");img.src=e.target.result;imageBox.appendChild(img);
+    const delBtn=document.createElement("button");delBtn.className="delete-image-btn";delBtn.innerHTML="×";
     delBtn.onclick=function(){img.remove();delBtn.remove();document.getElementById("proof").value="";};
     imageBox.appendChild(delBtn);
-  };
-  reader.readAsDataURL(file);
+  };reader.readAsDataURL(file);
 });
 
 async function resizeImage(file,maxWidth=800,maxHeight=800){
   return new Promise((resolve,reject)=>{
-    const img=new Image();
-    const reader=new FileReader();
+    const img=new Image();const reader=new FileReader();
     reader.onload=e=>img.src=e.target.result;
-    img.onload=()=>{
-      const canvas=document.createElement("canvas");
-      let width=img.width,height=img.height;
-      if(width>height&&width>maxWidth){height*=maxWidth/width;width=maxWidth;}
-      else if(height>maxHeight){width*=maxHeight/height;height=maxHeight;}
-      canvas.width=width;canvas.height=height;
-      canvas.getContext("2d").drawImage(img,0,0,width,height);
+    img.onload=()=>{let w=img.width,h=img.height;
+      if(w>h&&w>maxWidth){h*=maxWidth/w;w=maxWidth;}
+      else if(h>maxHeight){w*=maxHeight/h;h=maxHeight;}
+      const canvas=document.createElement("canvas");canvas.width=w;canvas.height=h;
+      canvas.getContext("2d").drawImage(img,0,0,w,h);
       canvas.toBlob(blob=>resolve(blob),"image/jpeg",0.7);
     };
-    reader.onerror=reject;
-    reader.readAsDataURL(file);
+    reader.onerror=reject;reader.readAsDataURL(file);
   });
 }
-async function blobToBase64(blob){
-  return new Promise((resolve,reject)=>{
-    const reader=new FileReader();
-    reader.onloadend=()=>resolve(reader.result);
-    reader.onerror=reject;
-    reader.readAsDataURL(blob);
-  });
-}
+async function blobToBase64(blob){return new Promise((resolve,reject)=>{const r=new FileReader();r.onloadend=()=>resolve(r.result);r.onerror=reject;r.readAsDataURL(blob);});}
 
 document.getElementById("transferForm").onsubmit=async function(e){
   e.preventDefault();
   const amount=document.getElementById("amountPay").value.trim();
   const fullname=document.getElementById("fullname").value.trim();
+  const platform=document.getElementById("platformSend").value;
   const file=document.getElementById("proof").files[0];
   if(!file)return;
-  document.getElementById("waveLoader").style.display="flex";
+  document.getElementById("waveLoader").style.display="block";
   document.getElementById("submitBtnPay").disabled=true;
   try{
     const compressed=await resizeImage(file);
     const imageBase64=await blobToBase64(compressed);
-    const response=await fetch("https://script.google.com/macros/s/AKfycbwC_bDa2MnGmitv1XmuLXbPlzGPgdxT-oPwW5IrC4aevFNe9kDK4FwhmbwFcDqlaCm7/exec",{
-      method:"POST",
-      headers:{"Content-Type":"application/x-www-form-urlencoded"},
-      body:new URLSearchParams({amount,fullname,imageBase64})
+    const res=await fetch("https://script.google.com/macros/s/AKfycbwC_bDa2MnGmitv1XmuLXbPlzGPgdxT-oPwW5IrC4aevFNe9kDK4FwhmbwFcDqlaCm7/exec",{
+      method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},
+      body:new URLSearchParams({amount,fullname,platform,imageBase64})
     });
-    if(response.ok){
-      alert("✅ تم إرسال البيانات بنجاح");
-      payOverlay.classList.remove("show");
-    }
+    if(res.ok){alert("✅ تم إرسال الطلب بنجاح");payOverlay.classList.remove("show");}
   }catch(err){console.error(err);}
-  finally{
-    document.getElementById("waveLoader").style.display="none";
-    document.getElementById("submitBtnPay").disabled=false;
-  }
-}
+  finally{document.getElementById("waveLoader").style.display="none";document.getElementById("submitBtnPay").disabled=false;}
+};
 </script>
 </body>
 </html>
