@@ -39,8 +39,7 @@
   .hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
   .ghost{background:transparent;border:1px solid var(--line);color:#E5E7EB}
   .badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
-  .badge{position:relative;font-size:12px;border:1px solid var(--line);border-radius:999px;padding:6px 10px;background:#10162a;color:#cbd5e1;overflow:hidden}
-  .badge::after{content:"";position:absolute;inset:0;width:40%;background:linear-gradient(90deg,rgba(34,197,94,.4),rgba(79,106,242,.4));animation:shimmer 3.5s ease infinite}
+  .badge{font-size:12px;border:1px solid var(--line);border-radius:999px;padding:6px 10px;background:#10162a;color:#cbd5e1}
   .hero-bottom{height:5px;background:linear-gradient(90deg,var(--grad1),var(--grad2),var(--grad3),var(--grad4))}
 
   /* GRID */
@@ -75,13 +74,12 @@
   .btn img{width:20px;height:20px}
   .confirm{display:none;padding:10px;margin-top:8px;background:#052e1b;border:1px solid #14532d;border-radius:10px;color:#a7f3d0}
 
-  /* خطوات العملية مع خط مضيء */
+  /* 🔥 تحسين: خط مضيء في خطوات العملية */
   .steps{display:grid;gap:10px}
   @media(min-width:640px){.steps{grid-template-columns:repeat(4,1fr)}}
   .step{background:#0f1426;border:1px dashed #2b3342;border-radius:14px;padding:12px;position:relative;overflow:hidden}
   .trust-line{height:4px;border-radius:999px;background:linear-gradient(90deg,rgba(34,197,94,.25),rgba(79,106,242,.25));margin-top:8px;overflow:hidden;position:relative}
   .trust-line::after{content:"";position:absolute;inset:0;width:40%;background:linear-gradient(90deg,rgba(34,197,94,.7),rgba(79,106,242,.7));animation:shimmer 3.2s ease infinite}
-
   @keyframes shimmer{0%{transform:translateX(-120%)}100%{transform:translateX(260%)}}
 </style>
 </head>
@@ -181,20 +179,4 @@ function onSelectMethod(key){
       <div class="note">${info.note}</div>
       <div><strong>رقم الحساب:</strong> ${info.account}</div>
       <div><strong>الإسم:</strong> ${info.holder}</div>
-      <div><strong>Motif:</strong> ${info.motif}</div>
-      <div class="field"><label>المبلغ</label><input type="number" min="${info.min}" max="${info.max}"></div>
-      <div class="field"><label>صورة التحويل</label><input type="file"></div>
-      <div class="field"><label>الإسم الكامل</label><input type="text"></div>
-      <button class="btn">تأكيد</button>`;
-  } else {
-    bankDetails.innerHTML=`
-      <h3>${key.toUpperCase()}</h3>
-      <div class="note">لإتمام التحويل تواصل معنا عبر الواتساب.</div>
-      <a class="btn" href="https://wa.me/212713041921" target="_blank">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt=""> تواصل عبر الواتساب
-      </a>`;
-  }
-}
-</script>
-</body>
-</html>
+      <div
