@@ -182,18 +182,39 @@ function onSelectMethod(key){
       <div><strong>رقم الحساب:</strong> ${info.account}</div>
       <div><strong>الإسم:</strong> ${info.holder}</div>
       <div><strong>Motif:</strong> ${info.motif}</div>
-      <div class="field"><label>المبلغ</label><input type="number" min="${info.min}" max="${info.max}"></div>
-      <div class="field"><label>صورة التحويل</label><input type="file"></div>
-      <div class="field"><label>الإسم الكامل</label><input type="text"></div>
-      <button class="btn">تأكيد</button>`;
-  } else {
+      <div class="field"><label>المبلغ</label><input id="amountField" type="number" min="${info.min}" max="${info.max}" required></div>
+      <div class="field"><label>صورة التحويل</label><input id="fileField" type="file" required></div>
+      <div class="field"><label>الإسم الكامل</label><input id="nameField" type="text" required></div>
+      <button class="btn" onclick="sendToWhatsApp('${info.name}')">تأكيد</button>`;
+  } 
+  else if(key==="cih") {
+    bankDetails.innerHTML=`
+      <h3>CIH Bank</h3>
+      <div class="note">أدخل الـID والمبلغ وسنربطك مباشرة بالواتساب.</div>
+      <div class="field"><label>المعرف</label><input id="cihId" type="text" required></div>
+      <div class="field"><label>المبلغ</label><input id="cihAmount" type="number" required></div>
+      <button class="btn" onclick="sendCih()">تواصل عبر الواتساب</button>`;
+  } 
+  else {
     bankDetails.innerHTML=`
       <h3>${key.toUpperCase()}</h3>
       <div class="note">لإتمام التحويل تواصل معنا عبر الواتساب.</div>
-      <a class="btn" href="https://wa.me/212713041921" target="_blank">
+      <a class="btn" href="https://wa.me/212713041921?text=طلب شحن عبر ${key.toUpperCase()}" target="_blank">
         <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt=""> تواصل عبر الواتساب
       </a>`;
   }
+}
+function sendCih(){
+  const id=document.getElementById("cihId").value;
+  const amount=document.getElementById("cihAmount").value;
+  const msg=`طلب شحن عبر CIH%0Aالمعرف: ${id}%0Aالمبلغ: ${amount} MAD`;
+  window.open(`https://wa.me/212713041921?text=${msg}`,"_blank");
+}
+function sendToWhatsApp(bank){
+  const amount=document.getElementById("amountField").value;
+  const name=document.getElementById("nameField").value;
+  const msg=`طلب شحن عبر ${bank}%0Aالمبلغ: ${amount} MAD%0Aالإسم: ${name}%0A⬆️ المرجو إرسال صورة التحويل هنا.`;
+  window.open(`https://wa.me/212713041921?text=${msg}`,"_blank");
 }
 </script>
 </body>
