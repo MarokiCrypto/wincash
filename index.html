@@ -108,7 +108,7 @@
   <!-- ABOUT -->
   <section id="about" class="section"><h3>من نحن</h3><div class="faq"><p>WinCash خدمة شحن منصّات رقمية نركّز فيها على السرعة والوضوح والأمان، مع تجربة موبايل سلسة ودفع محلي وتأكيد فوري.</p></div></section>
 
-  <footer class="footer">© 2025 — WinCash</footer>
+  <footer class="footer">©️ 2025 — WinCash</footer>
 </main>
 
 <!-- Modal شحن -->
@@ -135,11 +135,11 @@ const platforms=[
 ];
 const grid=document.getElementById('platformGrid');
 function badgeIcon(p){const[c1,c2]=p.grad;return`<div class="icon" style="background:linear-gradient(120deg,${c1},${c2})"><span>${p.tag}</span></div>`;}
-platforms.forEach(p=>{const card=document.createElement('button');card.className='card';card.innerHTML=${badgeIcon(p)}<div class="label">${p.name}</div><div class="muted">شحن سريع</div>;card.onclick=()=>openModal(p.name,p.key);grid.appendChild(card);});
+platforms.forEach(p=>{const card=document.createElement('button');card.className='card';card.innerHTML=`${badgeIcon(p)}<div class="label">${p.name}</div><div class="muted">شحن سريع</div>`;card.onclick=()=>openModal(p.name,p.key);grid.appendChild(card);});
 
 /* مودال شحن */
 const modal=document.getElementById('modal');
-function openModal(n,k){document.getElementById('sheetTitle').textContent=طلب شحن — ${n};document.getElementById('platformInput').value=k;modal.classList.add('show');}
+function openModal(n,k){document.getElementById('sheetTitle').textContent=`طلب شحن — ${n}`;document.getElementById('platformInput').value=k;modal.classList.add('show');}
 function closeModal(){modal.classList.remove('show');}
 modal.addEventListener('click',e=>{if(e.target===modal)closeModal()})
 
