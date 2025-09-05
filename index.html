@@ -39,8 +39,7 @@
   .hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
   .ghost{background:transparent;border:1px solid var(--line);color:#E5E7EB}
   .badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
-  .badge{position:relative;font-size:12px;border:1px solid var(--line);border-radius:999px;padding:6px 10px;background:#10162a;color:#cbd5e1;overflow:hidden}
-  .badge::after{content:"";position:absolute;inset:0;width:40%;background:linear-gradient(90deg,rgba(34,197,94,.4),rgba(79,106,242,.4));animation:shimmer 3.5s ease infinite}
+  .badge{font-size:12px;border:1px solid var(--line);border-radius:999px;padding:6px 10px;background:#10162a;color:#cbd5e1}
   .hero-bottom{height:5px;background:linear-gradient(90deg,var(--grad1),var(--grad2),var(--grad3),var(--grad4))}
 
   /* GRID */
@@ -60,7 +59,14 @@
   .faq{background:#0f1426;border:1px solid var(--line);border-radius:16px;padding:12px}
   details{border:1px solid var(--line);border-radius:12px;padding:10px;margin:8px 0;background:#10162a}
   summary{cursor:pointer;font-weight:800}
-  .footer{margin-top:18px;padding:16px;border-top:1px solid #151a25;color:#9CA3AF;font-size:12px}
+  .footer{
+    margin-top:18px;
+    padding:16px;
+    border-top:1px solid #151a25;
+    color:#9CA3AF;
+    font-size:12px;
+    text-align:center;
+  }
 
   /* MODAL */
   .overlay{position:fixed;inset:0;background:rgba(4,6,12,.6);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;z-index:80}
@@ -74,15 +80,6 @@
   .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 16px;border:none;border-radius:12px;color:#0b1020;font-weight:900;background:linear-gradient(90deg,var(--grad1),var(--grad2),var(--grad3),var(--grad4));cursor:pointer;text-align:center;width:100%;margin-top:10px}
   .btn img{width:20px;height:20px}
   .confirm{display:none;padding:10px;margin-top:8px;background:#052e1b;border:1px solid #14532d;border-radius:10px;color:#a7f3d0}
-
-  /* خطوات العملية مع خط مضيء */
-  .steps{display:grid;gap:10px}
-  @media(min-width:640px){.steps{grid-template-columns:repeat(4,1fr)}}
-  .step{background:#0f1426;border:1px dashed #2b3342;border-radius:14px;padding:12px;position:relative;overflow:hidden}
-  .trust-line{height:4px;border-radius:999px;background:linear-gradient(90deg,rgba(34,197,94,.25),rgba(79,106,242,.25));margin-top:8px;overflow:hidden;position:relative}
-  .trust-line::after{content:"";position:absolute;inset:0;width:40%;background:linear-gradient(90deg,rgba(34,197,94,.7),rgba(79,106,242,.7));animation:shimmer 3.2s ease infinite}
-
-  @keyframes shimmer{0%{transform:translateX(-120%)}100%{transform:translateX(260%)}}
 </style>
 </head>
 <body>
@@ -96,19 +93,16 @@
   <section id="platforms" class="section"><h3>اختيار المنصّة</h3><div id="platformGrid" class="grid"></div></section>
 
   <!-- HOW -->
-  <section class="section"><h3>كيف تتم العملية؟</h3>
-    <div class="steps">
-      <div class="step"><div>① اختيار المنصّة</div><div class="muted">اختر من القائمة</div><div class="trust-line"></div></div>
-      <div class="step"><div>② إدخال الـ ID</div><div class="muted">اكتب معرفك</div><div class="trust-line"></div></div>
-      <div class="step"><div>③ الدفع</div><div class="muted">حوّل المبلغ</div><div class="trust-line"></div></div>
-      <div class="step"><div>④ تنفيذ وتأكيد</div><div class="muted">تأكيد فوري</div><div class="trust-line"></div></div>
-    </div>
-  </section>
+  <section class="section"><h3>كيف تتم العملية؟</h3><div class="steps"><div>① اختيار المنصّة</div><div>② إدخال الـ ID</div><div>③ الدفع</div><div>④ تنفيذ وتأكيد</div></div></section>
 
   <!-- ABOUT -->
   <section id="about" class="section"><h3>من نحن</h3><div class="faq"><p>WinCash خدمة شحن منصّات رقمية نركّز فيها على السرعة والوضوح والأمان، مع تجربة موبايل سلسة ودفع محلي وتأكيد فوري.</p></div></section>
 
-  <footer class="footer">© 2025 — WinCash</footer>
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div>©️ 2025 — WinCash. جميع العلامات المذكورة ملك لأصحابها.</div>
+    <div style="margin-top:6px">تنبيه: الشحن يخضع لشروط المنصّات والقوانين المحلية. الرجاء الاستخدام المسؤول.</div>
+  </footer>
 </main>
 
 <!-- Modal شحن -->
@@ -119,82 +113,28 @@
 
 <script>
 /* المنصات */
-const platforms=[
-  {key:'22bet',name:'22Bet',tag:'22',grad:['#4f6af2','#8a56f0']},
-  {key:'melbet',name:'Melbet',tag:'MB',grad:['#dd2a7b','#8a56f0']},
-  {key:'linebet',name:'Linebet',tag:'LB',grad:['#f69c5e','#dd2a7b']},
-  {key:'1xbet',name:'1xBet',tag:'1X',grad:['#4f6af2','#58a6ff']},
-  {key:'megapari',name:'MegaPari',tag:'MP',grad:['#8a56f0','#4f6af2']},
-  {key:'mostbet',name:'Mostbet',tag:'MS',grad:['#dd2a7b','#f69c5e']},
-  {key:'betwinner',name:'Betwinner',tag:'BW',grad:['#34d399','#4f6af2']},
-  {key:'paripesa',name:'Paripesa',tag:'PP',grad:['#8a56f0','#dd2a7b']},
-  {key:'888starz',name:'888Starz',tag:'88',grad:['#f69c5e','#8a56f0']},
-  {key:'mystake',name:'MyStake',tag:'MS',grad:['#58a6ff','#4f6af2']},
-  {key:'stake',name:'Stake',tag:'SK',grad:['#4f6af2','#2dd4bf']},
-  {key:'xparibet',name:'Xparibet',tag:'XP',grad:['#dd2a7b','#4f6af2']}
-];
+const platforms=[{key:'22bet',name:'22Bet',tag:'22',grad:['#4f6af2','#8a56f0']},{key:'melbet',name:'Melbet',tag:'MB',grad:['#dd2a7b','#8a56f0']},{key:'linebet',name:'Linebet',tag:'LB',grad:['#f69c5e','#dd2a7b']},{key:'1xbet',name:'1xBet',tag:'1X',grad:['#4f6af2','#58a6ff']},{key:'megapari',name:'MegaPari',tag:'MP',grad:['#8a56f0','#4f6af2']},{key:'mostbet',name:'Mostbet',tag:'MS',grad:['#dd2a7b','#f69c5e']},{key:'betwinner',name:'Betwinner',tag:'BW',grad:['#34d399','#4f6af2']},{key:'paripesa',name:'Paripesa',tag:'PP',grad:['#8a56f0','#dd2a7b']},{key:'888starz',name:'888Starz',tag:'88',grad:['#f69c5e','#8a56f0']},{key:'mystake',name:'MyStake',tag:'MS',grad:['#58a6ff','#4f6af2']},{key:'stake',name:'Stake',tag:'SK',grad:['#4f6af2','#2dd4bf']},{key:'xparibet',name:'Xparibet',tag:'XP',grad:['#dd2a7b','#4f6af2']}];
 const grid=document.getElementById('platformGrid');
 function badgeIcon(p){const[c1,c2]=p.grad;return`<div class="icon" style="background:linear-gradient(120deg,${c1},${c2})"><span>${p.tag}</span></div>`;}
-platforms.forEach(p=>{const card=document.createElement('button');card.className='card';card.innerHTML=${badgeIcon(p)}<div class="label">${p.name}</div><div class="muted">شحن سريع</div>;card.onclick=()=>openModal(p.name,p.key);grid.appendChild(card);});
+platforms.forEach(p=>{const card=document.createElement('button');card.className='card';card.innerHTML=`${badgeIcon(p)}<div class="label">${p.name}</div><div class="muted">شحن سريع</div>`;card.onclick=()=>openModal(p.name,p.key);grid.appendChild(card);});
 
 /* مودال شحن */
 const modal=document.getElementById('modal');
-function openModal(n,k){document.getElementById('sheetTitle').textContent=طلب شحن — ${n};document.getElementById('platformInput').value=k;modal.classList.add('show');}
+function openModal(n,k){document.getElementById('sheetTitle').textContent=`طلب شحن — ${n}`;document.getElementById('platformInput').value=k;modal.classList.add('show');}
 function closeModal(){modal.classList.remove('show');}
 modal.addEventListener('click',e=>{if(e.target===modal)closeModal()})
 
 /* معالجة فورم */
 const form=document.getElementById('chargeForm');const submitBtn=document.getElementById('submitBtn');const confirmBox=document.getElementById('confirmBox');
-form.addEventListener('submit',async e=>{
-  e.preventDefault();
-  submitBtn.disabled=true;
-  await new Promise(r=>setTimeout(r,1200));
-  confirmBox.style.display='block';form.reset();
-  submitBtn.disabled=false;
-  modal.classList.remove('show');payOverlay.classList.add('show');
-});
+form.addEventListener('submit',async e=>{e.preventDefault();submitBtn.disabled=true;await new Promise(r=>setTimeout(r,1200));confirmBox.style.display='block';form.reset();submitBtn.disabled=false;modal.classList.remove('show');payOverlay.classList.add('show');});
 
 /* البنوك */
 const payOverlay=document.getElementById('payOverlay');function closePay(){payOverlay.classList.remove('show');}
 const banksGrid=document.getElementById('banksGrid');const bankDetails=document.getElementById('bankDetails');
-
-const BANK_DETAILS={
-  barid:{name:'AL BARID BANK',account:'10468669 1',holder:'AHMED PAY',motif:'Service',min:100,max:5000,note:'❗ يرجى إدخال المبلغ بدون فاصلة ويجب إتمام التحويل خلال 10 دقائق.'},
-  cashplus:{name:'CASH PLUS',account:'0727258044',holder:'LAMYAE',motif:'FORMATION',min:100,max:5000,note:'قم بالتحويل خلال 10 دقائق باستخدام البيانات التالية.'}
-};
-const METHODS=[
-  {key:'barid',title:'Al Barid Bank'},
-  {key:'cashplus',title:'Cash Plus'},
-  {key:'cih',title:'CIH Bank'},
-  {key:'attijari',title:'Attijariwafa Bank'},
-  {key:'bmce',title:'BMCE'},
-  {key:'societe',title:'Société Générale'},
-  {key:'bcp',title:'BCP'}
-];
+const BANK_DETAILS={barid:{name:'AL BARID BANK',account:'10468669 1',holder:'AHMED PAY',motif:'Service',min:100,max:5000,note:'❗ يرجى إدخال المبلغ بدون فاصلة ويجب إتمام التحويل خلال 10 دقائق.'},cashplus:{name:'CASH PLUS',account:'0727258044',holder:'LAMYAE',motif:'FORMATION',min:100,max:5000,note:'قم بالتحويل خلال 10 دقائق باستخدام البيانات التالية.'}};
+const METHODS=[{key:'barid',title:'Al Barid Bank'},{key:'cashplus',title:'Cash Plus'},{key:'cih',title:'CIH Bank'},{key:'attijari',title:'Attijariwafa Bank'},{key:'bmce',title:'BMCE'},{key:'societe',title:'Société Générale'},{key:'bcp',title:'BCP'}];
 METHODS.forEach(m=>{const b=document.createElement('button');b.className='bank';b.textContent=m.title;b.onclick=()=>onSelectMethod(m.key);banksGrid.appendChild(b);});
-function onSelectMethod(key){
-  bankDetails.classList.remove('hidden');
-  if(BANK_DETAILS[key]){
-    const info=BANK_DETAILS[key];
-    bankDetails.innerHTML=`
-      <h3>${info.name}</h3>
-      <div class="note">${info.note}</div>
-      <div><strong>رقم الحساب:</strong> ${info.account}</div>
-      <div><strong>الإسم:</strong> ${info.holder}</div>
-      <div><strong>Motif:</strong> ${info.motif}</div>
-      <div class="field"><label>المبلغ</label><input type="number" min="${info.min}" max="${info.max}"></div>
-      <div class="field"><label>صورة التحويل</label><input type="file"></div>
-      <div class="field"><label>الإسم الكامل</label><input type="text"></div>
-      <button class="btn">تأكيد</button>`;
-  } else {
-    bankDetails.innerHTML=`
-      <h3>${key.toUpperCase()}</h3>
-      <div class="note">لإتمام التحويل تواصل معنا عبر الواتساب.</div>
-      <a class="btn" href="https://wa.me/212713041921" target="_blank">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt=""> تواصل عبر الواتساب
-      </a>`;
-  }
-}
+function onSelectMethod(key){bankDetails.classList.remove('hidden');if(BANK_DETAILS[key]){const info=BANK_DETAILS[key];bankDetails.innerHTML=`<h3>${info.name}</h3><div class="note">${info.note}</div><div><strong>رقم الحساب:</strong> ${info.account}</div><div><strong>الإسم:</strong> ${info.holder}</div><div><strong>Motif:</strong> ${info.motif}</div><div class="field"><label>المبلغ</label><input type="number" min="${info.min}" max="${info.max}"></div><div class="field"><label>صورة التحويل</label><input type="file"></div><div class="field"><label>الإسم الكامل</label><input type="text"></div><button class="btn">تأكيد</button>`;} else {bankDetails.innerHTML=`<h3>${key.toUpperCase()}</h3><div class="note">لإتمام التحويل تواصل معنا عبر الواتساب.</div><a class="btn" href="https://wa.me/212713041921" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt=""> تواصل عبر الواتساب</a>`;}}
 </script>
 </body>
 </html>
