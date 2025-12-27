@@ -49,12 +49,19 @@
   .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
   @media(min-width:480px){.grid{grid-template-columns:repeat(3,1fr)}}
   @media(min-width:760px){.grid{grid-template-columns:repeat(4,1fr)}}
-  .card{background:#0f1426;border:1px solid var(--line);border-radius:16px;padding:12px;text-align:center;cursor:pointer;transition:.2s}
-  .card:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(0,0,0,.35)}
+  .card{background:#0f1426;border:1px solid var(--line);border-radius:16px;padding:12px;text-align:center;cursor:pointer;transition:.2s; border: 1px solid var(--line); color: var(--ink)}
+  .card:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(0,0,0,.35); border-color: var(--grad3)}
   .icon{width:34px;height:34px;border-radius:12px;display:inline-grid;place-items:center;margin:2px auto 6px}
   .icon span{font-weight:900;font-size:12px;color:#fff}
   .label{margin-top:4px;font-weight:800;font-size:13px}
   .muted{font-size:12px;color:var(--muted)}
+
+  /* BANK BUTTONS & LIST */
+  .banks {display:grid; grid-template-columns: repeat(2,1fr); gap:10px; margin-bottom: 15px;}
+  .bank {background:#161b2c; border:1px solid var(--line); padding:12px; border-radius:12px; color:white; cursor:pointer; font-weight:700; transition:0.2s;}
+  .bank:hover {background:#1e253d; border-color: var(--grad3);}
+  .note {background:rgba(245,158,11,0.1); color:var(--warn); padding:10px; border-radius:10px; font-size:12px; margin-bottom:15px; border: 1px solid rgba(245,158,11,0.2)}
+  .hidden {display:none}
 
   /* FAQ / FOOTER */
   .faq{background:#0f1426;border:1px solid var(--line);border-radius:16px;padding:12px}
@@ -65,17 +72,17 @@
   /* MODAL */
   .overlay{position:fixed;inset:0;background:rgba(4,6,12,.6);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;z-index:80}
   .overlay.show{display:flex}
-  .sheet{width:min(620px,92vw);background:#0f1426;border-radius:18px;border:1px solid var(--line);box-shadow:var(--shadow);overflow:hidden}
+  .sheet{width:min(620px,92vw);background:#0f1426;border-radius:18px;border:1px solid var(--line);box-shadow:var(--shadow);overflow:hidden; max-height: 90vh; overflow-y: auto;}
   .sheet-head{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--line)}
   .sheet-body{padding:14px 16px}
   .x{border:none;background:transparent;font-size:22px;cursor:pointer;color:#cbd5e1}
   .field{display:grid;gap:6px;margin:10px 0}
+  .field label {font-size: 13px; font-weight: 700; color: var(--muted)}
   .field input,.field select,.field textarea{width:100%;padding:12px;border:1px solid #2b3342;border-radius:12px;background:#0c1222;color:#e5e7eb}
   .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 16px;border:none;border-radius:12px;color:#0b1020;font-weight:900;background:linear-gradient(90deg,var(--grad1),var(--grad2),var(--grad3),var(--grad4));cursor:pointer;text-align:center;width:100%;margin-top:10px}
   .btn img{width:20px;height:20px}
   .confirm{display:none;padding:10px;margin-top:8px;background:#052e1b;border:1px solid #14532d;border-radius:10px;color:#a7f3d0}
 
-  /* خطوات العملية مع خط مضيء */
   .steps{display:grid;gap:10px}
   @media(min-width:640px){.steps{grid-template-columns:repeat(4,1fr)}}
   .step{background:#0f1426;border:1px dashed #2b3342;border-radius:14px;padding:12px;position:relative;overflow:hidden}
@@ -86,16 +93,14 @@
 </style>
 </head>
 <body>
+
 <header class="nav"><div class="nav-inner"><div class="brand"><span class="logo-dot"></span><div class="brand-name">Win<b>Cash</b></div></div><button class="cta" onclick="document.getElementById('platforms').scrollIntoView({behavior:'smooth'})">ابدأ الآن</button></div></header>
 
 <main class="wrap">
-  <!-- HERO -->
-  <section class="hero"><div class="hero-top"><h1 class="title">شحن منصّاتك بسرعة وأمان — تصميم حديث يُوحي بالثقة</h1><p class="subtitle">اختر منصّتك، أدخل الـ ID، ادفع محليًا، ويتم التنفيذ خلال دقائق مع متابعة فورية.</p><div class="hero-actions"><button class="cta" onclick="document.getElementById('platforms').scrollIntoView({behavior:'smooth'})">اختَر المنصّة</button><button class="cta ghost" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">من نحن</button></div><div class="badges"><span class="badge">دعم فوري</span><span class="badge">تأكيد آلي</span><span class="badge">طرق دفع محلية</span><span class="badge">حماية بيانات</span></div></div><div class="hero-bottom"></div></section>
+  <section class="hero"><div class="hero-top"><h1 class="title">شحن منصّاتك بسرعة وأمان — ثقة تامة</h1><p class="subtitle">اختر منصّتك، أدخل الـ ID، ادفع محليًا، ويتم التنفيذ خلال دقائق.</p><div class="hero-actions"><button class="cta" onclick="document.getElementById('platforms').scrollIntoView({behavior:'smooth'})">اختَر المنصّة</button><button class="cta ghost" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">من نحن</button></div><div class="badges"><span class="badge">دعم فوري</span><span class="badge">تأكيد آلي</span><span class="badge">طرق دفع محلية</span><span class="badge">حماية بيانات</span></div></div><div class="hero-bottom"></div></section>
 
-  <!-- PLATFORMS -->
   <section id="platforms" class="section"><h3>اختيار المنصّة</h3><div id="platformGrid" class="grid"></div></section>
 
-  <!-- HOW -->
   <section class="section"><h3>كيف تتم العملية؟</h3>
     <div class="steps">
       <div class="step"><div>① اختيار المنصّة</div><div class="muted">اختر من القائمة</div><div class="trust-line"></div></div>
@@ -105,20 +110,17 @@
     </div>
   </section>
 
-  <!-- ABOUT -->
-  <section id="about" class="section"><h3>من نحن</h3><div class="faq"><p>WinCash خدمة شحن منصّات رقمية نركّز فيها على السرعة والوضوح والأمان، مع تجربة موبايل سلسة ودفع محلي وتأكيد فوري.</p></div></section>
-
+  <section id="about" class="section"><h3>من نحن</h3><div class="faq"><p>WinCash خدمة شحن منصّات رقمية نركّز فيها على السرعة والوضوح والأمان، مع تجربة موبايل سلسة ودفع محلي وتأكيد فوري عبر الواتساب.</p></div></section>
   <footer class="footer">©️ 2025 — WinCash</footer>
 </main>
 
-<!-- Modal شحن -->
-<div class="overlay" id="modal"><div class="sheet"><div class="sheet-head"><strong id="sheetTitle">طلب شحن</strong><button class="x" onclick="closeModal()">×</button></div><div class="sheet-body"><form id="chargeForm"><input type="hidden" id="platformInput"><div class="field"><label>معرّف الحساب</label><input id="userId" required></div><div class="field"><label>المبلغ</label><input id="amount" type="number" required></div><button id="submitBtn" class="btn" type="submit"><span>تنفيذ الطلب</span></button><div id="confirmBox" class="confirm">تم استلام طلبك! جارٍ المعالجة.</div></form></div></div></div>
+<div class="overlay" id="modal"><div class="sheet"><div class="sheet-head"><strong id="sheetTitle">طلب شحن</strong><button class="x" onclick="closeModal()">×</button></div><div class="sheet-body"><form id="chargeForm"><input type="hidden" id="platformInput"><div class="field"><label>معرّف الحساب (ID)</label><input id="userId" placeholder="أدخل الـ ID هنا" required></div><div class="field"><label>المبلغ المراد شحنه (MAD)</label><input id="amount" type="number" placeholder="مثال: 200" required></div><button id="submitBtn" class="btn" type="submit"><span>متابعة للدفع</span></button></form></div></div></div>
 
-<!-- Modal دفع -->
-<div class="overlay" id="payOverlay"><div class="sheet"><div class="sheet-head"><strong>إعادة تعبئة الحساب</strong><button class="x" onclick="closePay()">×</button></div><div class="sheet-body"><div class="banks" id="banksGrid"></div><div id="bankDetails" class="hidden"></div></div></div></div>
+<div class="overlay" id="payOverlay"><div class="sheet"><div class="sheet-head"><strong>اختر طريقة الدفع</strong><button class="x" onclick="closePay()">×</button></div><div class="sheet-body"><div class="banks" id="banksGrid"></div><div id="bankDetails" class="hidden"></div></div></div></div>
 
 <script>
-/* المنصات */
+const WHATSAPP_NUMBER = "212713041921"; // الرقم بصيغة صحيحة بدون فواصل
+
 const platforms=[
   {key:'22bet',name:'22Bet',tag:'22',grad:['#4f6af2','#8a56f0']},
   {key:'melbet',name:'Melbet',tag:'MB',grad:['#dd2a7b','#8a56f0']},
@@ -128,93 +130,86 @@ const platforms=[
   {key:'mostbet',name:'Mostbet',tag:'MS',grad:['#dd2a7b','#f69c5e']},
   {key:'betwinner',name:'Betwinner',tag:'BW',grad:['#34d399','#4f6af2']},
   {key:'paripesa',name:'Paripesa',tag:'PP',grad:['#8a56f0','#dd2a7b']},
-  {key:'888starz',name:'888Starz',tag:'88',grad:['#f69c5e','#8a56f0']},
-  {key:'mystake',name:'MyStake',tag:'MS',grad:['#58a6ff','#4f6af2']},
-  {key:'stake',name:'Stake',tag:'SK',grad:['#4f6af2','#2dd4bf']},
-  {key:'xparibet',name:'Xparibet',tag:'XP',grad:['#dd2a7b','#4f6af2']}
+  {key:'888starz',name:'888Starz',tag:'88',grad:['#f69c5e','#8a56f0']}
 ];
+
 const grid=document.getElementById('platformGrid');
 function badgeIcon(p){const[c1,c2]=p.grad;return`<div class="icon" style="background:linear-gradient(120deg,${c1},${c2})"><span>${p.tag}</span></div>`;}
 platforms.forEach(p=>{const card=document.createElement('button');card.className='card';card.innerHTML=`${badgeIcon(p)}<div class="label">${p.name}</div><div class="muted">شحن سريع</div>`;card.onclick=()=>openModal(p.name,p.key);grid.appendChild(card);});
 
-/* مودال شحن */
 const modal=document.getElementById('modal');
-function openModal(n,k){document.getElementById('sheetTitle').textContent=`طلب شحن — ${n}`;document.getElementById('platformInput').value=k;modal.classList.add('show');}
-function closeModal(){modal.classList.remove('show');}
-modal.addEventListener('click',e=>{if(e.target===modal)closeModal()})
+const payOverlay=document.getElementById('payOverlay');
 
-/* معالجة فورم */
-const form=document.getElementById('chargeForm');const submitBtn=document.getElementById('submitBtn');const confirmBox=document.getElementById('confirmBox');
-form.addEventListener('submit',async e=>{
+function openModal(n,k){document.getElementById('sheetTitle').textContent=`شحن — ${n}`;document.getElementById('platformInput').value=k;modal.classList.add('show');}
+function closeModal(){modal.classList.remove('show');}
+function closePay(){payOverlay.classList.remove('show'); document.getElementById('bankDetails').classList.add('hidden');}
+
+// إغلاق عند الضغط خارج الصندوق
+window.onclick = (e) => { if(e.target == modal) closeModal(); if(e.target == payOverlay) closePay(); }
+
+const form=document.getElementById('chargeForm');
+form.addEventListener('submit', e=>{
   e.preventDefault();
-  submitBtn.disabled=true;
-  await new Promise(r=>setTimeout(r,1200));
-  confirmBox.style.display='block';form.reset();
-  submitBtn.disabled=false;
-  modal.classList.remove('show');payOverlay.classList.add('show');
+  modal.classList.remove('show');
+  payOverlay.classList.add('show');
 });
 
-/* البنوك */
-const payOverlay=document.getElementById('payOverlay');function closePay(){payOverlay.classList.remove('show');}
-const banksGrid=document.getElementById('banksGrid');const bankDetails=document.getElementById('bankDetails');
-
 const BANK_DETAILS={
-  barid:{name:'AL BARID BANK',account:'10468669 1',holder:'AHMED PAY',motif:'Service',min:100,max:5000,note:'❗ يرجى إدخال المبلغ بدون فاصلة ويجب إتمام التحويل خلال 10 دقائق.'},
-  cashplus:{name:'CASH PLUS',account:'0727258044',holder:'LAMYAE',motif:'FORMATION',min:100,max:5000,note:'قم بالتحويل خلال 10 دقائق باستخدام البيانات التالية.'}
+  barid:{name:'AL BARID BANK',account:'10468669 1',holder:'AHMED PAY',motif:'Service',min:100,max:5000,note:'يرجى إتمام التحويل خلال 10 دقائق لتسريع العملية.'},
+  cashplus:{name:'CASH PLUS',account:'0727258044',holder:'LAMYAE',motif:'FORMATION',min:100,max:5000,note:'قم بالتحويل عبر أي وكالة Cash Plus قريبة منك.'}
 };
+
 const METHODS=[
   {key:'barid',title:'Al Barid Bank'},
   {key:'cashplus',title:'Cash Plus'},
   {key:'cih',title:'CIH Bank'},
-  {key:'attijari',title:'Attijariwafa Bank'},
-  {key:'bmce',title:'BMCE'},
-  {key:'societe',title:'Société Générale'},
-  {key:'bcp',title:'BCP'}
+  {key:'attijari',title:'Attijariwafa'},
+  {key:'bmce',title:'BMCE / Bank of Africa'}
 ];
-METHODS.forEach(m=>{const b=document.createElement('button');b.className='bank';b.textContent=m.title;b.onclick=()=>onSelectMethod(m.key);banksGrid.appendChild(b);});
+
+const banksGrid=document.getElementById('banksGrid');
+const bankDetails=document.getElementById('bankDetails');
+
+METHODS.forEach(m=>{
+  const b=document.createElement('button');
+  b.className='bank';
+  b.textContent=m.title;
+  b.onclick=()=>onSelectMethod(m.key);
+  banksGrid.appendChild(b);
+});
+
 function onSelectMethod(key){
   bankDetails.classList.remove('hidden');
+  const user_id = document.getElementById('userId').value;
+  const amount_val = document.getElementById('amount').value;
+  const platform_name = document.getElementById('platformInput').value;
+
   if(BANK_DETAILS[key]){
     const info=BANK_DETAILS[key];
     bankDetails.innerHTML=`
-      <h3>${info.name}</h3>
       <div class="note">${info.note}</div>
-      <div><strong>رقم الحساب:</strong> ${info.account}</div>
-      <div><strong>الإسم:</strong> ${info.holder}</div>
-      <div><strong>Motif:</strong> ${info.motif}</div>
-      <div class="field"><label>المبلغ</label><input id="amountField" type="number" min="${info.min}" max="${info.max}" required></div>
-      <div class="field"><label>صورة التحويل</label><input id="fileField" type="file" required></div>
-      <div class="field"><label>الإسم الكامل</label><input id="nameField" type="text" required></div>
-      <button class="btn" onclick="sendToWhatsApp('${info.name}')">تأكيد</button>`;
-  } 
-  else if(key==="cih") {
-    bankDetails.innerHTML=`
-      <h3>CIH Bank</h3>
-      <div class="note">أدخل الـID والمبلغ وسنربطك مباشرة بالواتساب.</div>
-      <div class="field"><label>المعرف</label><input id="cihId" type="text" required></div>
-      <div class="field"><label>المبلغ</label><input id="cihAmount" type="number" required></div>
-      <button class="btn" onclick="sendCih()">تواصل عبر الواتساب</button>`;
-  } 
-  else {
+      <h3>${info.name}</h3>
+      <div class="field"><label>رقم الحساب</label><input readonly value="${info.account}"></div>
+      <div class="field"><label>اسم المستفيد</label><input readonly value="${info.holder}"></div>
+      <div class="field"><label>الإسم الكامل (الخاص بك)</label><input id="senderName" placeholder="أدخل اسمك الكامل"></div>
+      <button class="btn" onclick="sendToWhatsApp('${info.name}')">إرسال إثبات الدفع</button>`;
+  } else {
     bankDetails.innerHTML=`
       <h3>${key.toUpperCase()}</h3>
-      <div class="note">لإتمام التحويل تواصل معنا عبر الواتساب.</div>
-      <a class="btn" href="https://wa.me/212713041921?text=طلب شحن عبر ${key.toUpperCase()}" target="_blank">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt=""> تواصل عبر الواتساب
-      </a>`;
+      <div class="note">يرجى التواصل معنا لتزويدك ببيانات الحساب الحالية لهذه الخدمة.</div>
+      <button class="btn" onclick="sendToWhatsApp('${key.toUpperCase()}')">تواصل عبر واتساب</button>`;
   }
 }
-function sendCih(){
-  const id=document.getElementById("cihId").value;
-  const amount=document.getElementById("cihAmount").value;
-  const msg=`طلب شحن عبر CIH%0Aالمعرف: ${id}%0Aالمبلغ: ${amount} MAD`;
-  window.open(`https://wa.me/212713041921?text=${msg}`,"_blank");
-}
-function sendToWhatsApp(bank){
-  const amount=document.getElementById("amountField").value;
-  const name=document.getElementById("nameField").value;
-  const msg=`طلب شحن عبر ${bank}%0Aالمبلغ: ${amount} MAD%0Aالإسم: ${name}%0A⬆️ المرجو إرسال صورة التحويل هنا.`;
-  window.open(`https://wa.me/212713041921?text=${msg}`,"_blank");
+
+function sendToWhatsApp(bankName){
+  const id = document.getElementById('userId').value;
+  const amount = document.getElementById('amount').value;
+  const platform = document.getElementById('platformInput').value;
+  const sender = document.getElementById('senderName')?.value || "غير محدد";
+
+  const message = `طلب شحن جديد 🚀%0A--------------------%0Aالمنصة: ${platform}%0Aالمعرف (ID): ${id}%0Aالمبلغ: ${amount} MAD%0Aطريقة الدفع: ${bankName}%0Aاسم المرسل: ${sender}%0A--------------------%0Aسأقوم بإرسال صورة التحويل الآن.`;
+  
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, "_blank");
 }
 </script>
 </body>
