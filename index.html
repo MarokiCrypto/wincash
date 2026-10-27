@@ -1,1139 +1,569 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>صراحة ولا ضربة؟ 😂🎡 - لعبة صحاب القسم</title>
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
-    <!-- FontAwesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Canvas Confetti for Celebrations -->
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#10091f">
+<title>شكون غادي يسول شكون؟ 🎭</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap');
 
-    <style>
-        :root {
-            --bg-dark: #0f0a1c;
-            --card-bg: #1a1233;
-            --accent-purple: #8b5cf6;
-            --accent-pink: #ec4899;
-            --accent-gold: #f59e0b;
-            --accent-green: #10b981;
-            --accent-red: #ef4444;
-            --text-light: #f3f4f6;
-            --neon-glow: 0 0 15px rgba(236, 72, 153, 0.5);
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Tajawal', sans-serif;
-            user-select: none;
-        }
-
-        body {
-            background-color: var(--bg-dark);
-            color: var(--text-light);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            overflow-x: hidden;
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(139, 92, 246, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(236, 72, 153, 0.15) 0%, transparent 40%);
-        }
-
-        header {
-            text-align: center;
-            padding: 20px 10px;
-            width: 100%;
-            background: rgba(26, 18, 51, 0.8);
-            backdrop-filter: blur(10px);
-            border-bottom: 2px solid rgba(245, 158, 11, 0.3);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        h1 {
-            font-size: 2.2rem;
-            font-weight: 900;
-            background: linear-gradient(45deg, var(--accent-gold), var(--accent-pink), var(--accent-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: var(--neon-glow);
-            margin-bottom: 5px;
-        }
-
-        p.subtitle {
-            color: #a7f3d0;
-            font-size: 0.95rem;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 800px;
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        /* Views management */
-        .view {
-            width: 100%;
-            display: none;
-            animation: fadeIn 0.4s ease-in-out;
-        }
-
-        .view.active {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Card Styling */
-        .card {
-            background: var(--card-bg);
-            border-radius: 20px;
-            padding: 20px;
-            width: 100%;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            margin-bottom: 20px;
-        }
-
-        /* Player Setup View */
-        .input-group {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-
-        input[type="text"] {
-            flex: 1;
-            padding: 12px 18px;
-            border-radius: 12px;
-            border: 2px solid var(--accent-purple);
-            background: rgba(15, 10, 28, 0.7);
-            color: white;
-            font-size: 1.1rem;
-            outline: none;
-            transition: all 0.3s;
-        }
-
-        input[type="text"]:focus {
-            border-color: var(--accent-pink);
-            box-shadow: var(--neon-glow);
-        }
-
-        button {
-            padding: 12px 24px;
-            border-radius: 12px;
-            border: none;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        button:active {
-            transform: scale(0.96);
-        }
-
-        .btn-primary {
-            background: linear-gradient(45deg, var(--accent-purple), var(--accent-pink));
-            color: white;
-            box-shadow: 0 4px 15px rgba(236, 72, 153, 0.4);
-        }
-
-        .btn-gold {
-            background: linear-gradient(45deg, #f59e0b, #d97706);
-            color: white;
-            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
-            width: 100%;
-            padding: 16px;
-            font-size: 1.3rem;
-            margin-top: 10px;
-        }
-
-        .btn-danger {
-            background: var(--accent-red);
-            color: white;
-        }
-
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .player-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 15px;
-            max-height: 200px;
-            overflow-y: auto;
-            padding: 5px;
-        }
-
-        .player-tag {
-            background: rgba(139, 92, 246, 0.2);
-            border: 1px solid var(--accent-purple);
-            padding: 8px 15px;
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1rem;
-        }
-
-        .player-tag i {
-            cursor: pointer;
-            color: var(--accent-red);
-        }
-
-        /* Wheel View */
-        .wheel-container {
-            position: relative;
-            width: 320px;
-            height: 320px;
-            margin: 20px auto;
-        }
-
-        @media (min-width: 500px) {
-            .wheel-container {
-                width: 400px;
-                height: 400px;
-            }
-        }
-
-        #wheelCanvas {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            box-shadow: 0 0 30px rgba(139, 92, 246, 0.5), inset 0 0 15px rgba(0,0,0,0.5);
-        }
-
-        .wheel-pointer {
-            position: absolute;
-            top: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 0;
-            border-left: 15px solid transparent;
-            border-right: 15px solid transparent;
-            border-top: 30px solid var(--accent-gold);
-            z-index: 10;
-            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5));
-        }
-
-        /* Scoreboard */
-        .scoreboard {
-            width: 100%;
-            background: rgba(15, 10, 28, 0.6);
-            border-radius: 15px;
-            padding: 10px 15px;
-            margin-top: 15px;
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .score-item {
-            text-align: center;
-            font-size: 0.9rem;
-        }
-
-        .score-item span.name {
-            color: #d1d5db;
-        }
-
-        .score-item span.points {
-            color: var(--accent-gold);
-            font-weight: bold;
-            margin-right: 5px;
-        }
-
-        /* Modals & Dialogs */
-        .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            padding: 20px;
-            backdrop-filter: blur(5px);
-        }
-
-        .modal.active {
-            display: flex;
-            animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        @keyframes popIn {
-            from { transform: scale(0.8); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
-
-        .modal-content {
-            background: var(--card-bg);
-            border-radius: 25px;
-            padding: 25px;
-            width: 100%;
-            max-width: 500px;
-            border: 2px solid var(--accent-purple);
-            box-shadow: 0 0 30px rgba(139, 92, 246, 0.6);
-            text-align: center;
-            position: relative;
-        }
-
-        .selected-player-title {
-            font-size: 1.8rem;
-            color: var(--accent-gold);
-            margin-bottom: 15px;
-        }
-
-        /* Action Choice Buttons */
-        .action-options {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin: 20px 0;
-        }
-
-        .btn-action {
-            padding: 15px;
-            font-size: 1.2rem;
-            border-radius: 15px;
-            color: white;
-            text-align: right;
-            padding-right: 25px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .btn-truth {
-            background: linear-gradient(45deg, #10b981, #059669);
-        }
-
-        .btn-dare {
-            background: linear-gradient(45deg, #ef4444, #dc2626);
-        }
-
-        .btn-pass {
-            background: linear-gradient(45deg, #6b7280, #4b5563);
-        }
-
-        /* Filters & Levels */
-        .level-selector {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-
-        .level-badge {
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            cursor: pointer;
-            border: 1px solid transparent;
-            opacity: 0.6;
-        }
-
-        .level-badge.active {
-            opacity: 1;
-            border-color: white;
-            font-weight: bold;
-        }
-
-        .lvl-easy { background: var(--accent-green); color: white; }
-        .lvl-bold { background: var(--accent-gold); color: black; }
-        .lvl-deep { background: var(--accent-red); color: white; }
-
-        /* Question Box Display */
-        .question-box {
-            background: rgba(15, 10, 28, 0.8);
-            border-radius: 15px;
-            padding: 20px;
-            margin: 15px 0;
-            border: 1px dashed var(--accent-pink);
-            font-size: 1.3rem;
-            line-height: 1.6;
-            min-height: 100px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
-
-        .voting-section {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 15px;
-        }
-
-        .vote-btn {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: white;
-            padding: 8px 15px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 1rem;
-        }
-
-        .vote-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        /* Top Nav controls */
-        .top-nav {
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-            margin-bottom: 15px;
-        }
-
-        .sound-toggle {
-            background: rgba(255,255,255,0.1);
-            border: none;
-            color: white;
-            padding: 8px 12px;
-            border-radius: 50%;
-            cursor: pointer;
-        }
-
-        /* Questions Manager Modal */
-        .question-list-admin {
-            max-height: 300px;
-            overflow-y: auto;
-            text-align: right;
-            margin-top: 15px;
-        }
-
-        .q-item {
-            background: rgba(255,255,255,0.05);
-            padding: 8px 12px;
-            margin-bottom: 8px;
-            border-radius: 8px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.95rem;
-        }
-
-        .category-tab {
-            display: flex;
-            overflow-x: auto;
-            gap: 5px;
-            padding-bottom: 10px;
-            margin-bottom: 10px;
-        }
-
-        .tab-btn {
-            white-space: nowrap;
-            padding: 6px 12px;
-            font-size: 0.85rem;
-            background: rgba(255,255,255,0.1);
-            border-radius: 10px;
-            color: #ccc;
-        }
-
-        .tab-btn.active {
-            background: var(--accent-purple);
-            color: white;
-        }
-    </style>
+:root{
+  --bg:#10091f;--panel:#1b1230;--purple:#a855f7;
+  --pink:#ff4fa3;--gold:#ffd166;--text:#fff;
+  --muted:#b8a9ce;--line:#39264e;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;background:
+  radial-gradient(ellipse at top,#382052 0%,#10091f 60%);
+  color:var(--text);font-family:'Tajawal',sans-serif;
+  min-height:100vh;
+}
+button,input,select{font:inherit}
+button{cursor:pointer;transition:.2s}
+button:hover{transform:translateY(-2px);filter:brightness(1.12)}
+button:disabled{opacity:.45;cursor:not-allowed;transform:none}
+header{text-align:center;padding:28px 15px 18px}
+.logo{font-size:46px;margin-bottom:5px}
+h1{font-size:clamp(26px,6vw,43px);margin:0;font-weight:900}
+h1 span{color:var(--pink)}
+.subtitle{color:var(--muted);margin-top:10px}
+.container{width:min(760px,94%);margin:auto;padding-bottom:40px}
+.panel{
+ background:rgba(27,18,48,.94);border:1px solid var(--line);
+ border-radius:22px;padding:20px;margin:15px 0;
+ box-shadow:0 12px 35px #0002;
+}
+h2{font-size:21px;margin:0 0 15px}
+h3{margin:0 0 10px}
+label{display:block;color:var(--muted);margin-bottom:7px}
+input,select{
+ width:100%;padding:13px 14px;border-radius:12px;
+ border:1px solid var(--line);background:#10091f;color:white;
+ outline:none;margin-bottom:12px;
+}
+input:focus,select:focus{border-color:var(--purple)}
+.btn{
+ border:0;border-radius:13px;padding:13px 17px;
+ color:white;font-weight:800;background:linear-gradient(120deg,#8b35e8,#d946a8);
+}
+.btn.gold{background:linear-gradient(120deg,#ffbd50,#ff8b62);color:#24102d}
+.btn.secondary{background:#302041;border:1px solid #523765}
+.btn.danger{background:#642443}
+.btn.small{padding:8px 12px;font-size:13px}
+.btn.full{width:100%}
+.row{display:flex;gap:9px;flex-wrap:wrap}
+.row>*{flex:1}
+.players{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}
+.player{
+ background:#2b1b40;border:1px solid #503369;border-radius:12px;
+ padding:9px 12px;display:flex;gap:9px;align-items:center;
+}
+.player .remove{color:#ff80a8;background:none;border:0;font-size:18px}
+.badge{
+ display:inline-block;background:#39234f;color:#e5c9ff;
+ padding:6px 11px;border-radius:20px;font-size:13px;
+}
+.hidden{display:none!important}
+.muted{color:var(--muted);font-size:14px}
+.center{text-align:center}
+.big-emoji{font-size:56px;margin:8px}
+.wheel{
+ width:190px;height:190px;margin:12px auto 20px;border-radius:50%;
+ border:6px solid #ffd166;
+ background:conic-gradient(#8b35e8 0 60deg,#d946a8 60deg 120deg,
+ #5135a8 120deg 180deg,#f49b44 180deg 240deg,
+ #a23cba 240deg 300deg,#5734a8 300deg);
+ display:grid;place-items:center;font-size:48px;
+ box-shadow:0 0 30px #b34eff44;
+}
+.wheel.spin{animation:spin .65s ease-in-out}
+@keyframes spin{to{transform:rotate(720deg)}}
+.question{
+ font-size:clamp(21px,5vw,30px);font-weight:800;
+ line-height:1.8;margin:20px 0;
+}
+.duel{display:flex;align-items:center;justify-content:center;gap:13px;flex-wrap:wrap}
+.person{
+ min-width:115px;background:#2a1b41;border:1px solid #55376e;
+ border-radius:18px;padding:16px 12px;text-align:center;
+}
+.person .avatar{font-size:36px}
+.person strong{display:block;margin-top:8px;font-size:17px}
+.arrow{font-size:26px;color:var(--gold)}
+.categories{display:flex;flex-wrap:wrap;gap:8px}
+.cat{
+ background:#261836;color:white;border:1px solid #4a315e;
+ border-radius:22px;padding:9px 13px;
+}
+.cat.active{background:#9a3be1;border-color:#e7b6ff}
+.options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.option{
+ border:1px solid #533769;background:#261836;color:white;
+ padding:13px;border-radius:13px;font-weight:700;
+}
+.option.selected{border-color:var(--gold);background:#4a3045}
+.scoreline{
+ display:flex;justify-content:space-between;align-items:center;
+ border-bottom:1px solid var(--line);padding:11px 0;
+}
+.vote-option{width:100%;text-align:right;margin-bottom:8px}
+.progress{height:6px;background:#342342;border-radius:8px;overflow:hidden}
+.progress div{height:100%;background:linear-gradient(90deg,var(--purple),var(--pink));width:0;transition:.3s}
+footer{text-align:center;color:#7f6b96;font-size:12px;padding:15px}
+@media(max-width:420px){
+ .panel{padding:15px}.options{grid-template-columns:1fr}
+ .wheel{width:155px;height:155px}
+}
+</style>
 </head>
 <body>
 
-    <header>
-        <h1>صراحة ولا ضربة؟ 😂🎡</h1>
-        <p class="subtitle">لعبة الصراحة والتحديات الممتعة لأصدقاء القسم</p>
-    </header>
-
-    <div class="container">
-        <!-- Navigation Controls -->
-        <div class="top-nav">
-            <button class="sound-toggle" id="soundBtn" onclick="toggleSound()">
-                <i class="fas fa-volume-up" id="soundIcon"></i>
-            </button>
-            <div>
-                <button class="btn-secondary" onclick="openQuestionsAdmin()" style="font-size: 0.9rem; padding: 6px 12px;">
-                    <i class="fas fa-edit"></i> بنك الأسئلة
-                </button>
-                <button class="btn-secondary" onclick="resetGame()" style="font-size: 0.9rem; padding: 6px 12px;">
-                    <i class="fas fa-redo"></i> اعادة اللعب
-                </button>
-            </div>
-        </div>
-
-        <!-- VIEW 1: PLAYER SETUP -->
-        <div id="setupView" class="view active">
-            <div class="card">
-                <h2 style="margin-bottom: 15px; text-align: center;"><i class="fas fa-users"></i> إدخال أسماء اللاعبين</h2>
-                <div class="input-group">
-                    <input type="text" id="playerNameInput" placeholder="أدخل اسم اللاعب (مثلاً: أسامة، مريم)..." onkeypress="handleKeyPress(event)">
-                    <button class="btn-primary" onclick="addPlayer()"><i class="fas fa-plus"></i> إضافة</button>
-                </div>
-
-                <div class="player-list" id="playerList">
-                    <!-- Dynamic player tags -->
-                </div>
-
-                <button class="btn-gold" onclick="startGame()">
-                    ابدأ اللعب الآن! <i class="fas fa-play-circle"></i>
-                </button>
-            </div>
-        </div>
-
-        <!-- VIEW 2: THE WHEEL -->
-        <div id="wheelView" class="view">
-            <div class="card" style="text-align: center;">
-                <h2>دور العجلة يا أستاذ! 🎡</h2>
-                
-                <div class="wheel-container">
-                    <div class="wheel-pointer"></div>
-                    <canvas id="wheelCanvas" width="400" height="400"></canvas>
-                </div>
-
-                <button class="btn-gold" id="spinBtn" onclick="spinWheel()">
-                    دوّر العجلة! 🚀
-                </button>
-
-                <!-- Scoreboard displaying registered players -->
-                <div class="scoreboard" id="scoreboard">
-                    <!-- Dynamic scores -->
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL 1: PLAYER ACTION SELECTION (TRUTH OR DARE) -->
-    <div class="modal" id="actionModal">
-        <div class="modal-content">
-            <h3 class="selected-player-title" id="selectedPlayerName">أحمد</h3>
-            <p style="font-size: 1.1rem; margin-bottom: 15px;">جاء الدور عليك! أشنو غتختار؟</p>
-
-            <div class="level-selector">
-                <span class="level-badge lvl-easy active" onclick="setLevel('easy', this)">خفيف 🟢</span>
-                <span class="level-badge lvl-bold" onclick="setLevel('bold', this)">جريء 🟠</span>
-                <span class="level-badge lvl-deep" onclick="setLevel('deep', this)">حساس 🔴</span>
-            </div>
-
-            <div class="action-options">
-                <button class="btn-action btn-truth" onclick="chooseAction('truth')">
-                    <span>اعترف 🎤 (صراحة)</span>
-                    <i class="fas fa-comment-dots"></i>
-                </button>
-                <button class="btn-action btn-dare" onclick="chooseAction('dare')">
-                    <span>تحدّي 😂 (ضربة)</span>
-                    <i class="fas fa-fire"></i>
-                </button>
-                <button class="btn-action btn-pass" onclick="chooseAction('pass')">
-                    <span>مرّر الدور ⏭️</span>
-                    <i class="fas fa-forward"></i>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL 2: QUESTION / DARE DISPLAY -->
-    <div class="modal" id="questionModal">
-        <div class="modal-content">
-            <h3 id="modalPlayerTitle" style="color: var(--accent-pink);">دور: أحمد</h3>
-            <span id="typeBadge" class="level-badge lvl-easy" style="opacity: 1; display: inline-block; margin: 10px 0;">صراحة</span>
-
-            <div class="question-box" id="questionText">
-                جاري جلب السؤال...
-            </div>
-
-            <div class="voting-section">
-                <button class="vote-btn" onclick="addPoints(1)"><i class="fas fa-thumbs-up"></i> إجابة ناضية (+1)</button>
-                <button class="vote-btn" onclick="addPoints(2)"><i class="fas fa-laugh-squint"></i> قتلتنا بالضحك (+2)</button>
-            </div>
-
-            <div style="margin-top: 20px; display: flex; gap: 10px; justify-content: center;">
-                <button class="btn-secondary" onclick="nextRandomQuestion()">سؤال آخر 🔄</button>
-                <button class="btn-primary" onclick="closeQuestionModal()">تم التنفيذ / كمل اللعب ➡️</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL 3: QUESTIONS BANK ADMIN -->
-    <div class="modal" id="adminModal">
-        <div class="modal-content" style="max-width: 650px;">
-            <h3 style="margin-bottom: 15px;">إدارة بنك الأسئلة والتحديات 📝</h3>
-            
-            <div class="category-tab" id="categoryTabs">
-                <!-- Category tabs will be rendered here -->
-            </div>
-
-            <div class="input-group">
-                <input type="text" id="newQuestionInput" placeholder="أضف سؤالاً جديداً أو تحدياً...">
-                <button class="btn-primary" onclick="addNewQuestion()"><i class="fas fa-plus"></i></button>
-            </div>
-
-            <div class="question-list-admin" id="adminQuestionsList">
-                <!-- Dynamic Questions -->
-            </div>
-
-            <button class="btn-secondary" onclick="closeAdminModal()" style="margin-top: 15px; width: 100%;">إغلاق</button>
-        </div>
-    </div>
-
-    <script>
-        /* ==================== GAME INITIAL STATE & BANK ==================== */
-        const DEFAULT_QUESTIONS = {
-            "شكون أكثر واحد؟": [
-                { t: "شكون أكثر واحد عصبي فينا؟", l: "easy" },
-                { t: "شكون أكثر واحد معصّب فالقسم؟", l: "easy" },
-                { t: "شكون أكثر واحد مكلّخ؟", l: "easy" },
-                { t: "شكون أكثر واحد فيه العياقة؟", l: "easy" },
-                { t: "شكون أكثر واحد كيتكبر على الناس؟", l: "easy" },
-                { t: "شكون أكثر واحد كيتخلّع بسرعة؟", l: "easy" },
-                { t: "شكون أكثر واحد كسول؟", l: "easy" },
-                { t: "شكون أكثر واحد كينعس فالقسم؟", l: "easy" },
-                { t: "شكون أكثر واحد كيضحك على كلشي؟", l: "easy" },
-                { t: "شكون أكثر واحد كيهضر بزاف؟", l: "easy" },
-                { t: "شكون أكثر واحد كيكذب باش يخرج من شي ورطة؟", l: "easy" },
-                { t: "شكون أكثر واحد كيجي ديما معطل؟", l: "easy" },
-                { t: "شكون أكثر واحد كيدير فيها فاهم وهو ما فاهم والو؟", l: "easy" },
-                { t: "شكون أكثر واحد كيتبدل وجهو ملي كيشوف شي واحد؟", l: "bold" },
-                { t: "شكون أكثر واحد كيدير المشاكل؟", l: "easy" },
-                { t: "شكون أكثر واحد مشهور فالقسم؟", l: "easy" },
-                { t: "شكون أكثر واحد محبوب عند الجميع؟", l: "easy" },
-                { t: "شكون أكثر واحد كيخبي الأسرار؟", l: "deep" },
-                { t: "شكون أكثر واحد كيقدر يقلب الجو ديال القسم؟", l: "easy" },
-                { t: "شكون أكثر واحد ممكن يولي مشهور فالمستقبل؟", l: "easy" },
-                { t: "شكون أكثر واحد كيسكت بزاف وكاتبغي تعرف فاش كيكرّي؟", l: "deep" },
-                { t: "شكون أكثر واحد كياكل الماكلة ديال الناس بلا ما يحشم؟", l: "easy" },
-                { t: "شكون أكثر واحد كينسا التلفون ديالو ديما؟", l: "easy" },
-                { t: "شكون أكثر واحد كيطيح فمواقف محرجة بلا ما يحس؟", l: "easy" },
-                { t: "شكون أكثر واحد كينصح الناس وهو فمه مزير؟", l: "easy" },
-                { t: "شكون أكثر واحد كيعرف أخبار القسم قبل أي واحد؟", l: "easy" },
-                { t: "شكون أكثر واحد كيزيد فيه فالحكايات؟", l: "easy" },
-                { t: "شكون أكثر واحد كيحمل المسؤولية فكلشي؟", l: "easy" },
-                { t: "شكون أكثر واحد كيبقى مركز فالتلفون واخا يكون الشرح طائر؟", l: "easy" },
-                { t: "شكون أكثر واحد كيتعطل فكل بلاصة كيمشي ليها؟", l: "easy" },
-                { t: "شكون أكثر واحد كيعصب الأستاذ غير بملامح وجهو؟", l: "bold" },
-                { t: "شكون أكثر واحد دمو حار وكيتقلق من والو؟", l: "bold" },
-                { t: "شكون أكثر واحد بارد دمه وما كيهمو والو؟", l: "easy" },
-                { t: "شكون أكثر واحد كريم وكيصرف على صحابو؟", l: "easy" },
-                { t: "شكون أكثر واحد بخيل ومستحيل يخلص عليك قهوة؟", l: "bold" },
-                { t: "شكون أكثر واحد كيعرف يقلد الأصوات بدقة؟", l: "easy" },
-                { t: "شكون أكثر واحد كيبغي يبان ذكي قدام البنات؟", l: "bold" },
-                { t: "شكون أكثر واحد كيبغي يبان خطير قدام الدراري؟", l: "bold" },
-                { t: "شكون أكثر واحد كيبكي بالزربة فالمواقف الصعبة؟", l: "deep" },
-                { t: "شكون أكثر واحد ديما مندمج مع شي لعبة فالتلفون؟", l: "easy" },
-                { t: "شكون أكثر واحد كيكره الدراسة بصح؟", l: "easy" },
-                { t: "شكون أكثر واحد كيدخل فشي نقاشات خاوية؟", l: "easy" },
-                { t: "شكون أكثر واحد كيكون هادئ فالبداية وملي كيتعرف عليه الواحد كيتصدم؟", l: "bold" },
-                { t: "شكون أكثر واحد كيبغي ينظم كلشي وكتجيه فوضى صعيبة؟", l: "easy" },
-                { t: "شكون أكثر واحد ديما مدوخ وما عارفش فين كاين؟", l: "easy" },
-                { t: "شكون أكثر واحد كيتفكر التفاصيل الصغيرة اللي كينساوها الناس؟", l: "deep" },
-                { t: "شكون أكثر واحد كيعاني مع النعاس فالصباح؟", l: "easy" },
-                { t: "شكون أكثر واحد كيبغي يدير راسه فاهم في التكنولوجيا؟", l: "easy" },
-                { t: "شكون أكثر واحد كيغير رأي ديالو بالزربة؟", l: "easy" },
-                { t: "شكون أكثر واحد كيتفاعل مع الأفلام والمسلسلات كأنه كيعيشها؟", l: "easy" },
-                { t: "شكون أكثر واحد كيخاف من حشرات صغيرة بحال الناموس أو الدبان؟", l: "easy" },
-                { t: "شكون أكثر واحد كيبغي يصور راسو ديما فكل بلاصة؟", l: "easy" },
-                { t: "شكون أكثر واحد كيعطيك نصائح زوينة وهو راسو عامر مشاكل؟", l: "bold" },
-                { t: "شكون أكثر واحد كيقدر يصبر على الجوع لمدة طويلة؟", l: "easy" },
-                { t: "شكون أكثر واحد كيموت على شي حاجة اسمها الماكلة؟", l: "easy" },
-                { t: "شكون أكثر واحد كيعرف يتفاوض ويسلك راسو فكلشي؟", l: "easy" },
-                { t: "شكون أكثر واحد كيتأثر بالتعليقات السلبية؟", l: "deep" },
-                { t: "شكون أكثر واحد كيتجاهل الميساجات متعمد؟", l: "bold" },
-                { t: "شكون أكثر واحد كيرد على الميساج بعد خمس أيام؟", l: "easy" },
-                { t: "شكون أكثر واحد كيكون عندو أسلوب زوين فالهضرة؟", l: "easy" },
-                { t: "شكون أكثر واحد كيهتم بالمظهر الخارجي بزاف قبل ما يخرج؟", l: "easy" },
-                { t: "شكون أكثر واحد دائم التذمر والشكوى من كلشي؟", l: "easy" },
-                { t: "شكون أكثر واحد كيتفائل فالمواقف الكحلة؟", l: "easy" },
-                { t: "شكون أكثر واحد كيتوقع الأسوأ ديما؟", l: "deep" },
-                { t: "شكون أكثر واحد كينصح صحابو بحال شي باه أو أمه؟", l: "easy" },
-                { t: "شكون أكثر واحد كيدخل سوق راسه بزاف؟", l: "bold" },
-                { t: "شكون أكثر واحد كيكون عزيز عليه يعاود نفس النكتة ألف مرة؟", l: "easy" },
-                { t: "شكون أكثر واحد كيبغي يكون محور الحفلة أو الجلسة؟", l: "easy" },
-                { t: "شكون أكثر واحد كيتعصب إلا تخالف الراي ديالو؟", l: "bold" },
-                { t: "شكون أكثر واحد كيبغي العزلة وما كيعجبوش الصداع؟", l: "deep" },
-                { t: "شكون أكثر واحد كيمشي فين كاين الصداع والمشاكل؟", l: "bold" },
-                { t: "شكون أكثر واحد كيقول كلمة معينة ديما فكلامه؟", l: "easy" },
-                { t: "شكون أكثر واحد كيتعلم بالزربة أي مهارة جديدة؟", l: "easy" },
-                { t: "شكون أكثر واحد كيتلفت بزاف إلا سمع سميتو؟", l: "easy" },
-                { t: "شكون أكثر واحد كيبغي يبان غامض وما كيعلم حتى واحد بأخباره؟", l: "deep" },
-                { t: "شكون أكثر واحد كينسى وين كيحط صاكو أو تلفونو؟", l: "easy" },
-                { t: "شكون أكثر واحد كيكون دايما هو السباق للحلول؟", l: "easy" },
-                { t: "شكون أكثر واحد كيكون هو السبب فإلغاء الخروج أو السفرة؟", l: "bold" },
-                { t: "شكون أكثر واحد كيموت على الضحك لدرجة كيطيح من الكرسي؟", l: "easy" },
-                { t: "شكون أكثر واحد كيكره يسمع رأي مخالف لرأيه؟", l: "bold" },
-                { t: "شكون أكثر واحد كيعاني مع الرياضة والبدن؟", l: "easy" },
-                { t: "شكون أكثر واحد كيتفنن في إيجاد الأعذار باش ما يحضرش للقسم؟", l: "easy" },
-                { t: "شكون أكثر واحد كيبان بحال شي ممثل سينمائي في تصرفاته؟", l: "easy" },
-                { t: "شكون أكثر واحد كيقدر ينام في أي وضعية كانت؟", l: "easy" },
-                { t: "شكون أكثر واحد كيكون واثق في راسه لدرجة الغرور؟", l: "bold" },
-                { t: "شكون أكثر واحد كيكره يتعامل مع الناس الجداد؟", l: "deep" },
-                { t: "شكون أكثر واحد كيتأثر بالدموع دغيا؟", l: "deep" },
-                { t: "شكون أكثر واحد كيكون ديما هو آخر واحد كيخرج من القسم؟", l: "easy" },
-                { t: "شكون أكثر واحد كيتأخر فالحفظ ولكن كيجيب نقطة زوينة؟", l: "easy" },
-                { t: "شكون أكثر واحد كيدير راسه ما سامع والو وهو كينصت مزيان؟", l: "bold" },
-                { t: "شكون أكثر واحد كيحب يطرح أسئلة كتصدّع الراس للأستاذ؟", l: "easy" },
-                { t: "شكون أكثر واحد كيكون متبوّق وكتعجبه الاستقلالية؟", l: "easy" },
-                { t: "شكون أكثر واحد كيكون رفقته ممتعة وما كاتحسش بالوقت معاه؟", l: "easy" },
-                { t: "شكون أكثر واحد كيتصرف بطفولة مهما كبر فالسن؟", l: "easy" },
-                { t: "شكون أكثر واحد كيكون فنان في إفساد المفاجآت؟", l: "bold" },
-                { t: "شكون أكثر واحد كيبغي يدير مقالب في أصحابه؟", l: "easy" },
-                { t: "شكون أكثر واحد كيتأثر بالبرد بالزربة وكيطير باللباس؟", l: "easy" },
-                { t: "شكون أكثر واحد كيكون هو الدعم النفسي ديال الشلة؟", l: "easy" },
-                { t: "شكون أكثر واحد كيبغي يفرّض رأيه على الكل؟", l: "bold" },
-                { t: "شكون أكثر واحد كيكون دائم الابتسامة مهما كان الظرف؟", l: "easy" },
-                { t: "شكون أكثر واحد كيكون كاره للروتين وكيحلب المغامرة؟", l: "easy" }
-            ],
-            "الحب والإعجاب": [
-                { t: "واش كتعجبك شي وحدة فالقسم؟", l: "bold" },
-                { t: "واش كيعجبك شي واحد فالقسم؟", l: "bold" },
-                { t: "شكون أكثر وحدة زوينة فالقسم؟", l: "bold" },
-                { t: "شكون أكثر واحد زوين فالقسم؟", l: "bold" },
-                { t: "شكون أكثر وحدة كتشد الانتباه ديالك؟", l: "bold" },
-                { t: "شكون أكثر واحد كيدخل ليك للخاطر؟", l: "bold" },
-                { t: "شكون أول شخص عجبك ملي دخلتي للقسم؟", l: "bold" },
-                { t: "واش سبق ليك عجبك شي واحد وما قلتيهاش ليه؟", l: "bold" },
-                { t: "إلا خاصك تختار شخص من القسم تخرج معاه، شكون غادي تختار؟", l: "bold" },
-                { t: "شكون الشخص اللي تقدر تعترف ليه بشي حاجة دابا؟", l: "deep" },
-                { t: "واش سبق ليك كذبتي وقلتي ما كيعجبني حتى واحد؟", l: "bold" },
-                { t: "شكون اللي ممكن يكون عندو شي كراش عليك؟", l: "bold" },
-                { t: "شكون أكثر واحد عندو جاذبية فالقسم؟", l: "bold" },
-                { t: "شكون اللي ممكن تتزوج بيه من بعد عشر سنين؟ 😂", l: "bold" },
-                { t: "واش سبق ليك غيرتي على شي واحد وما عندك حتى علاقة بيه؟", l: "deep" },
-                { t: "شكون الشخص اللي بغيتي تعرف واش كيعجب بيك ولا لا؟", l: "deep" },
-                { t: "شكون الشخص اللي كتفرح ملي كتشوفو؟", l: "bold" },
-                { t: "شكون الشخص اللي إلا صيفط ليك رسالة غادي تفرح بزاف؟", l: "bold" },
-                { t: "شكون آخر شخص فكرتي فيه قبل ما تنعس؟", l: "deep" },
-                { t: "واش سبق ليك حلمتي بشي واحد كيعجبك؟", l: "bold" },
-                { t: "واش سبق ليك كتبت شي رسالة حب ومسحتها قبل ما تصيفطها؟", l: "deep" },
-                { t: "شكون الشخص اللي كاتبغيه يكون حداك دابا فالتطبيقة؟", l: "bold" },
-                { t: "واش تقدر ترتبط بشخص ما كيعجبوكش والديه؟", l: "deep" },
-                { t: "شنو هو الموقف الرومانسي اللي كتحلم يوقع ليك؟", l: "bold" },
-                { t: "واش كتافق بلي الحب الحقيقي كيجي غير مرة وحدة فالعمر؟", l: "deep" },
-                { t: "شنو هي الصفة اللي ما كتحملهاش فالطرف الآخر؟", l: "bold" },
-                { t: "واش سبق ليك بكيتي علىود شي شخص فالماضي؟", l: "deep" },
-                { t: "شكون الشخص اللي كتشوف أنه مثالي للارتباط؟", l: "bold" },
-                { t: "واش كتعتقد بلي الصداقة تقدر تحول لقصة حب قوية؟", l: "bold" },
-                { t: "شنو هو أول حاجة كتلاحظها فصورة الشخص اللي كيعجبك؟", l: "bold" },
-                { t: "واش سبق ليك تسللت لحساب شي شخص باش تراقبه سراً؟", l: "deep" },
-                { t: "شنو هي أطول مدة بقيتي فكرتي فيها فشي شخص؟", l: "deep" },
-                { t: "واش كتقدر تعترف بإعجابك للطرف الآخر بكل جرأة؟", l: "bold" },
-                { t: "شنو هو أكتر موقف حسيت فيه بالغيرة العمياء؟", l: "deep" },
-                { t: "واش تؤمن بالحب من النظرة الأولى ولا كتقول خرافة؟", l: "bold" },
-                { t: "شكون الشخص اللي كتحس بالراحة المفرطة وأنت هاضر معاه؟", l: "bold" },
-                { t: "واش سبق ليك تمنيت تكون قريب لشخص مرتبط؟", l: "deep" },
-                { t: "شنو هي الهدية الرومانسية اللي كاتحلم تاخدها؟", l: "bold" },
-                { t: "واش كتعتقد أن الغيرة الزائدة دليل حب أو مرض نفسي؟", l: "deep" },
-                { t: "شنو هو السر العاطفي اللي خازنه ومحتاج تخرجه؟", l: "deep" },
-                { t: "واش سبق ليك حبيتي شخص من غير ما تشوفه وجهاً لوجه؟", l: "bold" },
-                { t: "شكون الشخص اللي كيتسيد تفكيرك طول اليوم؟", l: "deep" },
-                { t: "شنو هو الرد اللي كترجى تسمعه من الكراش ديالك؟", l: "bold" },
-                { t: "واش سبق ليك حسيت بالخذلان العاطفي؟", l: "deep" },
-                { t: "شنو هي الأغنية اللي كتهديها لشخص كتعزه فقلبك؟", l: "bold" },
-                { t: "واش كتقدر تسامح شخص خنقتك غيرته؟", l: "deep" },
-                { t: "شنو هو المعيار الأساسي عندك باش تختار شريك حياتك؟", l: "bold" },
-                { t: "واش سبق ليك درت شي خطوة جريئة ومتهورة علىود الحب؟", l: "bold" },
-                { t: "شكون الشخص اللي كتحس بلي كيشبهك بزاف فمشاعرك؟", l: "deep" },
-                { t: "واش تؤمن بوجود توأم الروح في هذا الزمن؟", l: "bold" },
-                { t: "شنو هو الكلمة اللي إلا سمعتها كيذوب قلبك؟", l: "bold" },
-                { t: "واش سبق ليك تضاربتي علىود شخص كتعزه؟", l: "bold" }
-            ]
-        };
-
-        let questionsBank = JSON.parse(localStorage.getItem('class_game_questions')) || DEFAULT_QUESTIONS;
-        let players = JSON.parse(localStorage.getItem('class_game_players')) || [];
-        let scores = JSON.parse(localStorage.getItem('class_game_scores')) || {};
-        let currentPlayer = null;
-        let currentLevel = 'easy';
-        let currentActionType = 'truth';
-        let activeAdminCategory = Object.keys(questionsBank)[0] || "شكون أكثر واحد؟";
-        let soundEnabled = true;
-
-        // Keep track of used questions to prevent repetition until all are exhausted
-        let usedQuestionsIndices = JSON.parse(localStorage.getItem('class_game_used')) || {};
-
-        window.onload = function() {
-            renderPlayerList();
-            if(players.length > 0) {
-                // If players exist, we can switch to wheel if needed, or keep setup. Let's stay on setup or restore if playing.
-            }
-        };
-
-        function handleKeyPress(e) {
-            if(e.key === 'Enter') {
-                addPlayer();
-            }
-        }
-
-        function addPlayer() {
-            const input = document.getElementById('playerNameInput');
-            const name = input.value.trim();
-            if(name && !players.includes(name)) {
-                players.push(name);
-                if(scores[name] === undefined) scores[name] = 0;
-                input.value = '';
-                renderPlayerList();
-                saveState();
-            }
-        }
-
-        function removePlayer(name) {
-            players = players.filter(p => p !== name);
-            delete scores[name];
-            renderPlayerList();
-            saveState();
-        }
-
-        function renderPlayerList() {
-            const listEl = document.getElementById('playerList');
-            listEl.innerHTML = '';
-            players.forEach(p => {
-                const tag = document.createElement('div');
-                tag.className = 'player-tag';
-                tag.innerHTML = `${p} <i class="fas fa-times" onclick="removePlayer('${p}')"></i>`;
-                listEl.appendChild(tag);
-            });
-        }
-
-        function startGame() {
-            if(players.length < 2) {
-                alert('المرجو إدخال لاعبين اثنين على الأقل لنبدأ اللعب! 🎮');
-                return;
-            }
-            document.getElementById('setupView').classList.remove('active');
-            document.getElementById('wheelView').classList.add('active');
-            updateScoreboard();
-            drawWheel();
-        }
-
-        function resetGame() {
-            if(confirm('هل أنت متأكد من إعادة اللعب وتصفير النقاط؟')) {
-                players = [];
-                scores = {};
-                localStorage.removeItem('class_game_players');
-                localStorage.removeItem('class_game_scores');
-                localStorage.removeItem('class_game_used');
-                usedQuestionsIndices = {};
-                location.reload();
-            }
-        }
-
-        function saveState() {
-            localStorage.setItem('class_game_players', JSON.stringify(players));
-            localStorage.setItem('class_game_scores', JSON.stringify(scores));
-            localStorage.setItem('class_game_used', JSON.stringify(usedQuestionsIndices));
-        }
-
-        /* ==================== WHEEL LOGIC ==================== */
-        let wheelAngle = 0;
-        let isSpinning = false;
-
-        function drawWheel() {
-            const canvas = document.getElementById('wheelCanvas');
-            const ctx = canvas.getContext('2d');
-            const numSegments = players.length;
-            const arc = (2 * Math.PI) / numSegments;
-            const colors = ['#8b5cf6', '#ec4899', '#f59e0b', '#10b981', '#3b82f6', '#ef4444', '#6366f1'];
-
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            const center = canvas.width / 2;
-            const radius = center - 10;
-
-            for(let i = 0; i < numSegments; i++) {
-                const angle = wheelAngle + i * arc;
-                ctx.beginPath();
-                ctx.fillStyle = colors[i % colors.length];
-                ctx.moveTo(center, center);
-                ctx.arc(center, center, radius, angle, angle + arc);
-                ctx.lineTo(center, center);
-                ctx.fill();
-                ctx.stroke();
-
-                // Draw text
-                ctx.save();
-                ctx.translate(center, center);
-                ctx.rotate(angle + arc / 2);
-                ctx.textAlign = 'right';
-                ctx.fillStyle = '#ffffff';
-                ctx.font = 'bold 16px Tajawal';
-                ctx.fillText(players[i], radius - 30, 10);
-                ctx.restore();
-            }
-        }
-
-        function spinWheel() {
-            if(isSpinning || players.length === 0) return;
-            isSpinning = true;
-            document.getElementById('spinBtn').disabled = true;
-
-            const spinAngle = Math.random() * 2000 + 3000; // random full rotations + offset
-            const duration = 3000;
-            const startTimestamp = performance.now();
-            const initialAngle = wheelAngle;
-
-            function animateSpin(now) {
-                const elapsed = now - startTimestamp;
-                const progress = Math.min(elapsed / duration, 1);
-                // Ease out cubic
-                const easeProgress = 1 - Math.pow(1 - progress, 3);
-                
-                wheelAngle = initialAngle + (spinAngle * easeProgress * Math.PI / 180);
-                drawWheel();
-
-                if(progress < 1) {
-                    requestAnimationFrame(animateSpin);
-                } else {
-                    isSpinning = false;
-                    document.getElementById('spinBtn').disabled = false;
-                    determineWinner();
-                }
-            }
-
-            requestAnimationFrame(animateSpin);
-        }
-
-        function determineWinner() {
-            const numSegments = players.length;
-            const arc = (2 * Math.PI) / numSegments;
-            // Normalize angle
-            const normalizedAngle = (2 * Math.PI - (wheelAngle % (2 * Math.PI))) % (2 * Math.PI);
-            // Pointer is at top (- Math.PI / 2 or 3*Math.PI/2 relative to standard start)
-            // Let's compute based on standard top pointer calculation:
-            const pointerAngle = (3 * Math.PI / 2 - wheelAngle) % (2 * Math.PI);
-            const positivePointerAngle = (pointerAngle + 2 * Math.PI) % (2 * Math.PI);
-            
-            const winningIndex = Math.floor(positivePointerAngle / arc) % numSegments;
-            currentPlayer = players[winningIndex];
-
-            // Show Action Choice Modal
-            document.getElementById('selectedPlayerName').innerText = currentPlayer;
-            document.getElementById('actionModal').classList.add('active');
-
-            if(soundEnabled) playSoundEffect();
-        }
-
-        /* ==================== GAMEPLAY FLOW ==================== */
-        function setLevel(lvl, el) {
-            currentLevel = lvl;
-            const badges = el.parentElement.children;
-            for(let b of badges) b.classList.remove('active');
-            el.classList.add('active');
-        }
-
-        function chooseAction(action) {
-            currentActionType = action;
-            document.getElementById('actionModal').classList.remove('active');
-
-            if(action === 'pass') {
-                // Pass turn to next player directly
-                alert(`قام ${currentPlayer} بتمرير الدور! ⏭️`);
-                return;
-            }
-
-            // Display question modal
-            document.getElementById('modalPlayerTitle').innerText = `دور: ${currentPlayer}`;
-            const typeBadge = document.getElementById('typeBadge');
-            if(action === 'truth') {
-                typeBadge.innerText = 'صراحة (اعترف)';
-                typeBadge.className = 'level-badge lvl-easy';
-            } else {
-                typeBadge.innerText = 'ضربة (تحدّي)';
-                typeBadge.className = 'level-badge lvl-deep';
-            }
-
-            loadRandomQuestion();
-            document.getElementById('questionModal').classList.add('active');
-            if(window.confetti) confetti({ particleCount: 50, spread: 60, origin: { y: 0.6 } });
-        }
-
-        function loadRandomQuestion() {
-            // Flatten or select from all questions matching current level or category, ensuring non-repeating
-            let allQList = [];
-            for(let cat in questionsBank) {
-                questionsBank[cat].forEach(q => {
-                    if(q.l === currentLevel) {
-                        allQList.push({ ...q, category: cat });
-                    }
-                });
-            }
-
-            if(allQList.length === 0) {
-                // Fallback to any questions if level match is empty
-                for(let cat in questionsBank) {
-                    questionsBank[cat].forEach(q => allQList.push({ ...q, category: cat }));
-                }
-            }
-
-            // Filter out already used questions if possible
-            if(!usedQuestionsIndices[currentLevel]) {
-                usedQuestionsIndices[currentLevel] = [];
-            }
-
-            let availableQuestions = allQList.filter((q, idx) => !usedQuestionsIndices[currentLevel].includes(q.t));
-
-            // If all questions of this level have been used, reset the tracker for this level so questions don't permanently dry up
-            if(availableQuestions.length === 0) {
-                usedQuestionsIndices[currentLevel] = [];
-                availableQuestions = allQList;
-            }
-
-            const randomIndex = Math.floor(Math.random() * availableQuestions.length);
-            const selectedQ = availableQuestions[randomIndex];
-
-            // Mark as used
-            usedQuestionsIndices[currentLevel].push(selectedQ.t);
-            saveState();
-
-            document.getElementById('questionText').innerText = selectedQ.t;
-        }
-
-        function nextRandomQuestion() {
-            loadRandomQuestion();
-        }
-
-        function addPoints(pts) {
-            if(currentPlayer && scores[currentPlayer] !== undefined) {
-                scores[currentPlayer] += pts;
-                updateScoreboard();
-                saveState();
-                alert(`تم إضافة ${pts} نقاط لـ ${currentPlayer} 🌟`);
-            }
-        }
-
-        function closeQuestionModal() {
-            document.getElementById('questionModal').classList.remove('active');
-        }
-
-        function updateScoreboard() {
-            const scoreboard = document.getElementById('scoreboard');
-            scoreboard.innerHTML = '';
-            players.forEach(p => {
-                const item = document.createElement('div');
-                item.className = 'score-item';
-                item.innerHTML = `<span class="name">${p}:</span> <span class="points">${scores[p] || 0}</span> نقاط`;
-                scoreboard.appendChild(item);
-            });
-        }
-
-        /* ==================== QUESTIONS ADMIN MODAL ==================== */
-        function openQuestionsAdmin() {
-            renderCategoryTabs();
-            renderAdminQuestions();
-            document.getElementById('adminModal').classList.add('active');
-        }
-
-        function closeAdminModal() {
-            document.getElementById('adminModal').classList.remove('active');
-        }
-
-        function renderCategoryTabs() {
-            const tabsContainer = document.getElementById('categoryTabs');
-            tabsContainer.innerHTML = '';
-            Object.keys(questionsBank).forEach(cat => {
-                const btn = document.createElement('button');
-                btn.className = `tab-btn ${cat === activeAdminCategory ? 'active' : ''}`;
-                btn.innerText = cat;
-                btn.onclick = () => {
-                    activeAdminCategory = cat;
-                    renderCategoryTabs();
-                    renderAdminQuestions();
-                };
-                tabsContainer.appendChild(btn);
-            });
-        }
-
-        function renderAdminQuestions() {
-            const listContainer = document.getElementById('adminQuestionsList');
-            listContainer.innerHTML = '';
-            const qList = questionsBank[activeAdminCategory] || [];
-            
-            qList.forEach((q, index) => {
-                const item = document.createElement('div');
-                item.className = 'q-item';
-                item.innerHTML = `
-                    <span>${q.t} (${q.l})</span>
-                    <button class="btn-danger" style="padding: 4px 8px; font-size: 0.8rem;" onclick="deleteQuestion('${activeAdminCategory}', ${index})"><i class="fas fa-trash"></i></button>
-                `;
-                listContainer.appendChild(item);
-            });
-        }
-
-        function addNewQuestion() {
-            const input = document.getElementById('newQuestionInput');
-            const val = input.value.trim();
-            if(val) {
-                if(!questionsBank[activeAdminCategory]) {
-                    questionsBank[activeAdminCategory] = [];
-                }
-                questionsBank[activeAdminCategory].push({ t: val, l: currentLevel });
-                input.value = '';
-                renderAdminQuestions();
-                localStorage.setItem('class_game_questions', JSON.stringify(questionsBank));
-            }
-        }
-
-        function deleteQuestion(cat, index) {
-            questionsBank[cat].splice(index, 1);
-            renderAdminQuestions();
-            localStorage.setItem('class_game_questions', JSON.stringify(questionsBank));
-        }
-
-        /* ==================== SOUND EFFECT (Web Audio API) ==================== */
-        function toggleSound() {
-            soundEnabled = !soundEnabled;
-            const icon = document.getElementById('soundIcon');
-            icon.className = soundEnabled ? 'fas fa-volume-up' : 'fas fa-volume-mute';
-        }
-
-        function playSoundEffect() {
-            if(!soundEnabled) return;
-            try {
-                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
-                osc.type = 'sine';
-                osc.frequency.setValueAtTime(440, audioCtx.currentTime);
-                osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.2);
-                gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.2);
-                osc.connect(gain);
-                gain.connect(audioCtx.destination);
-                osc.start();
-                osc.stop(audioCtx.currentTime + 0.2);
-            } catch(e) {
-                // AudioContext not allowed or supported without user gesture
-            }
-        }
-    </script>
+<header>
+ <div class="logo">🎭</div>
+ <h1>شكون غادي <span>يسول شكون؟</span></h1>
+ <div class="subtitle">ضحك • صراحة • تحديات • أسرار الأصحاب 😂</div>
+</header>
+
+<main class="container">
+
+<section class="panel" id="setup">
+ <h2>🎮 وجدوا اللعبة ديالكم</h2>
+ <label for="playerName">كتب اسم اللاعب</label>
+ <div class="row">
+  <input id="playerName" placeholder="مثلاً: يوسف" maxlength="24"
+   autocomplete="off" onkeydown="if(event.key==='Enter')addPlayer()">
+  <button class="btn" onclick="addPlayer()">+ زيد</button>
+ </div>
+ <div class="players" id="playersList"></div>
+ <p class="muted" id="playerCount">خاصكم على الأقل جوج لاعبين.</p>
+
+ <h3>🎯 اختار نوع اللعب</h3>
+ <div class="categories" id="categorySetup">
+  <button class="cat active" data-cat="الكل">🎲 الكل</button>
+  <button class="cat" data-cat="الضحك">😂 الضحك</button>
+  <button class="cat" data-cat="الحب">❤️ الحب</button>
+  <button class="cat" data-cat="الجريئة">😈 الجريئة</button>
+  <button class="cat" data-cat="الاعترافات">🤫 الاعترافات</button>
+  <button class="cat" data-cat="الصداقة">🫂 الصداقة</button>
+  <button class="cat" data-cat="التحديات">🔥 التحديات</button>
+  <button class="cat" data-cat="التصويت">🗳️ التصويت</button>
+ </div>
+
+ <label for="level" style="margin-top:18px">مستوى الجرأة</label>
+ <select id="level">
+  <option value="خفيف">😊 خفيف</option>
+  <option value="متوسط" selected>😏 متوسط</option>
+  <option value="جريء">🔥 جريء</option>
+ </select>
+ <label for="roundCount">عدد الجولات</label>
+ <select id="roundCount">
+  <option value="10">10 جولات</option>
+  <option value="20" selected>20 جولة</option>
+  <option value="50">50 جولة</option>
+  <option value="100">100 جولة</option>
+ </select>
+ <button class="btn full" onclick="startGame()">🚀 بدا اللعب</button>
+</section>
+
+<section class="panel hidden" id="game">
+ <div class="row" style="align-items:center">
+  <div><span class="badge" id="roundLabel">الجولة 1</span></div>
+  <div style="text-align:left"><span class="badge" id="modeLabel">🎲 عشوائي</span></div>
+ </div>
+ <div class="progress" style="margin-top:14px"><div id="progress"></div></div>
+
+ <div class="center" style="margin-top:20px">
+  <div class="wheel" id="wheel">🎡</div>
+  <button class="btn gold" onclick="chooseDuel()">🎲 اختار شكون يسول شكون</button>
+ </div>
+
+ <div id="duelArea" class="hidden">
+  <div class="duel" style="margin:20px 0">
+   <div class="person"><div class="avatar">🎤</div><strong id="asker">—</strong><span class="muted">غادي يسول</span></div>
+   <div class="arrow">➜</div>
+   <div class="person"><div class="avatar">🙋</div><strong id="answerer">—</strong><span class="muted">غادي يجاوب</span></div>
+  </div>
+
+  <div class="center">
+   <span class="badge" id="questionCategory">سؤال عشوائي</span>
+   <div class="question" id="questionText">دور العجلة باش نختارو السؤال!</div>
+  </div>
+
+  <div class="row">
+   <button class="btn secondary" onclick="skipQuestion()">⏭️ بدل السؤال</button>
+   <button class="btn" onclick="nextRound()">✅ الجواب / التالي</button>
+  </div>
+  <button class="btn secondary full" style="margin-top:9px" onclick="showVote()">🗳️ دابا نصوتو</button>
+ </div>
+
+ <div class="panel center" style="background:#160e26;margin-top:20px">
+  <h3>🏆 النقاط</h3>
+  <div id="scores"></div>
+ </div>
+
+ <div class="row">
+  <button class="btn secondary" onclick="showSection('setup')">⚙️ الإعدادات</button>
+  <button class="btn danger" onclick="endGame()">🏁 ساليو اللعب</button>
+ </div>
+</section>
+
+<section class="panel hidden" id="votePanel">
+ <h2>🗳️ شكون الأكثر احتمالاً...؟</h2>
+ <p class="muted">قراو السؤال وصوتو على الشخص اللي كيناسبكم.</p>
+ <div class="question" id="voteQuestion"></div>
+ <div id="voteOptions"></div>
+ <p class="muted" id="voteStatus"></p>
+ <button class="btn secondary full" onclick="closeVote()">رجوع للعبة</button>
+</section>
+
+<section class="panel hidden center" id="endPanel">
+ <div class="big-emoji">🏆🎉</div>
+ <h2>سالينا اللعب!</h2>
+ <p id="winnerText"></p>
+ <div id="finalScores"></div>
+ <button class="btn full" onclick="restartGame()">🔄 عاودو اللعب</button>
+ <button class="btn secondary full" style="margin-top:10px" onclick="resetAll()">🏠 لعبة جديدة</button>
+</section>
+
+</main>
+<footer>صممت للأصحاب ❤️ اللعب بالتراضي والاحترام ديال الجميع</footer>
+
+<script>
+const $ = id => document.getElementById(id);
+
+let players=[];
+let selectedCat='الكل';
+let round=0, maxRounds=20, currentAsker='', currentAnswerer='';
+let usedQuestions=new Set();
+let votes={};
+let gameStarted=false;
+let lastPair='';
+let currentQuestion=null;
+let previousPairs=new Set();
+let activeVote=false;
+
+const bank=[
+['الضحك','خفيف','شنو أكثر موقف مضحك وقع ليك قدام الناس؟'],
+['الضحك','خفيف','إلا وليتي مشهور نهار واحد، شنو أول حاجة غادي تدير؟'],
+['الضحك','خفيف','شكون فينا يقدر يضحك وسط موقف جدي؟'],
+['الضحك','متوسط','شنو أغرب كذبة قلتيها باش تهرب من شي موعد؟'],
+['الضحك','متوسط','شنو أكثر حاجة درتيها وندمتي عليها من بعد وضحكتي؟'],
+['الضحك','جريء','قلد شي واحد من المجموعة وخليهم يعرفوه.'],
+['الضحك','خفيف','إلا كنت شي حيوان، شنو غادي تكون وعلاش؟'],
+['الضحك','متوسط','شنو أكثر لقب مضحك تعطيتيه أو عطاوه ليك؟'],
+['الضحك','خفيف','شكون فينا يقدر يضيع حتى وهو كيتبع GPS؟'],
+['الضحك','جريء','دير إعلان مضحك على شي حاجة موجودة قدامك.'],
+
+['الحب','خفيف','شنو أهم صفة كتقلب عليها فالشخص اللي يعجبك؟'],
+['الحب','خفيف','كتفضل الحب من أول نظرة ولا الحب اللي كيجي مع الوقت؟'],
+['الحب','متوسط','واش سبق ليك عجبك شي واحد وما قدرتيش تقول ليه؟'],
+['الحب','متوسط','شنو أكثر تصرف بسيط يقدر يخليك تعجب بشي واحد؟'],
+['الحب','جريء','واش تقدر تبادر وتعترف بالإعجاب ديالك؟'],
+['الحب','خفيف','كتفضل الشخص الرومانسي ولا اللي كيضحكك؟'],
+['الحب','متوسط','شنو أكبر حاجة كتخاف منها فالعلاقة العاطفية؟'],
+['الحب','جريء','واش ممكن تعطي فرصة ثانية لشخص جرحك؟ وعلاش؟'],
+['الحب','خفيف','شنو أحسن موعد رومانسي كتتخيلو؟'],
+['الحب','متوسط','شنو رأيك فالصداقة اللي كتولي حب؟'],
+
+['الجريئة','متوسط','شنو حاجة عمرك ما قلتيها للمجموعة؟'],
+['الجريئة','متوسط','واش سبق ليك حكمتي على شي واحد ومن بعد اكتشفتي أنك غلطان؟'],
+['الجريئة','جريء','شنو قرار خديتيه وباقي كتفكر فيه حتى لدابا؟'],
+['الجريئة','جريء','إلا خاصك تبدل صفة وحدة فيك، شنو هي؟'],
+['الجريئة','متوسط','شنو موقف محرج باقي عاقل عليه مزيان؟'],
+['الجريئة','جريء','واش كتخبي مشاعرك ولا كتبينهم بسهولة؟'],
+['الجريئة','متوسط','شنو أكبر مغامرة بغيتي تجربها؟'],
+['الجريئة','جريء','شنو سؤال كتخاف الناس يسولوه ليك؟'],
+['الجريئة','متوسط','واش كتسامح بسهولة ولا كتحتاج الوقت؟'],
+['الجريئة','جريء','شنو حاجة بغيتي تقولها لشي واحد وما لقيتيش الفرصة؟'],
+
+['الاعترافات','خفيف','شنو عادة عندك وما كيعرفهاش بزاف ديال الناس؟'],
+['الاعترافات','متوسط','شنو حاجة كتديرها ملي كتكون بوحدك؟'],
+['الاعترافات','متوسط','واش سبق ليك ندمتي على ثقة عطيتها لشي شخص؟'],
+['الاعترافات','جريء','شنو أكبر درس تعلمتيه من شي غلطة؟'],
+['الاعترافات','خفيف','شنو حلم ديال الطفولة باقي باغي تحققو؟'],
+['الاعترافات','متوسط','شنو أكثر حاجة كتقلقك وما كتهضرش عليها؟'],
+['الاعترافات','جريء','واش سبق ليك تظاهرت أنك بخير وأنت ماشي بخير؟'],
+['الاعترافات','متوسط','شنو صفة فيك الناس كيفهموها غلط؟'],
+['الاعترافات','خفيف','شنو حاجة كتفرحك حتى إلا كانت بسيطة؟'],
+['الاعترافات','جريء','شنو أهم اعتذار خاصك تقدمو أو تتلقاه؟'],
+
+['الصداقة','خفيف','شنو أهم صفة خاصها تكون فالصديق الحقيقي؟'],
+['الصداقة','متوسط','واش سبق ليك تصالحتي مع صاحب من بعد خلاف كبير؟'],
+['الصداقة','خفيف','شكون فينا كيحافظ على الأسرار مزيان؟'],
+['الصداقة','متوسط','شنو التصرف اللي يقدر ينهي الصداقة عندك؟'],
+['الصداقة','جريء','إلا كان صاحبك غلطان، واش تواجهو ولا تسكت؟'],
+['الصداقة','خفيف','شنو أحسن ذكرى عندك مع صحابك؟'],
+['الصداقة','متوسط','واش كتفضل صحاب قليلين وقراب ولا مجموعة كبيرة؟'],
+['الصداقة','جريء','شنو خاص صاحبك يعرف عليك باش يفهمك مزيان؟'],
+['الصداقة','خفيف','شكون فينا تقدر تعيط ليه فنص الليل ويجاوبك؟'],
+['الصداقة','متوسط','كيفاش كتتصرف إلا حسيت براسك مهمش وسط المجموعة؟'],
+
+['التحديات','خفيف','قول جوج مجاملات صادقين لشخصين من المجموعة.'],
+['التحديات','خفيف','قول نكتة وحاول تضحك المجموعة فـ 15 ثانية.'],
+['التحديات','متوسط','مثل أنك مقدم نشرة أخبار لمدة 20 ثانية.'],
+['التحديات','متوسط','وصف واحد من صحابك بثلاث كلمات زوينة.'],
+['التحديات','جريء','غني مقطع صغير من شي أغنية كيختارها الفريق.'],
+['التحديات','خفيف','قول اسم خمسة أكلات فـ خمس ثواني.'],
+['التحديات','متوسط','هضر بحال روبو حتى يجي دورك مرة أخرى.'],
+['التحديات','جريء','دير مشهد تمثيلي ديال شي واحد كيطلب خدمة بطريقة مضحكة.'],
+['التحديات','خفيف','قول حقيقة إيجابية على كل واحد حداك.'],
+['التحديات','متوسط','حاول تقول جملة صعيبة ثلاث مرات بلا ما تغلط.']
+];
+
+const voteQuestions=[
+ 'شكون الأكثر احتمالاً يضحك فأسوأ وقت؟',
+ 'شكون الأكثر احتمالاً يولي مشهور؟',
+ 'شكون الأكثر احتمالاً يتزوج الأول؟',
+ 'شكون الأكثر احتمالاً ينسى موعد مهم؟',
+ 'شكون الأكثر احتمالاً يسافر بلا تخطيط؟',
+ 'شكون الأكثر احتمالاً يحافظ على سر؟',
+ 'شكون الأكثر احتمالاً يرسل رسالة للشخص الغلط؟',
+ 'شكون الأكثر احتمالاً ينجح فمشروع كبير؟',
+ 'شكون الأكثر احتمالاً يصالح الناس ملي يتخاصمو؟',
+ 'شكون الأكثر احتمالاً ينعس وسط الفيلم؟',
+ 'شكون الأكثر احتمالاً يبقى يضحك على نكتة قديمة؟',
+ 'شكون الأكثر احتمالاً يربح فمسابقة ذكاء؟',
+ 'شكون الأكثر احتمالاً يضيع فمدينة جديدة؟',
+ 'شكون الأكثر احتمالاً يعاون صاحبو بلا مقابل؟',
+ 'شكون الأكثر احتمالاً يبدل رأيو فآخر لحظة؟',
+ 'شكون الأكثر احتمالاً يبدا مشروع ويكملو؟',
+ 'شكون الأكثر احتمالاً يعرف أخبار المجموعة كاملة؟',
+ 'شكون الأكثر احتمالاً يبقى هادئ وسط المشاكل؟',
+ 'شكون الأكثر احتمالاً يدير مفاجأة زوينة لصاحبو؟',
+ 'شكون الأكثر احتمالاً يربح فالتحديات المضحكة؟'
+];
+
+function escapeHTML(s){
+ return String(s).replace(/[&<>"']/g,c=>({
+ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+ })[c]);
+}
+
+function addPlayer(){
+ const input=$('playerName');
+ const name=input.value.trim();
+ if(!name)return;
+ if(players.some(p=>p.name.toLowerCase()===name.toLowerCase())){
+  alert('هاد الاسم موجود من قبل!');return;
+ }
+ players.push({name,score:0});
+ input.value='';
+ renderPlayers();
+}
+
+function renderPlayers(){
+ $('playersList').innerHTML=players.map((p,i)=>`
+ <div class="player">
+  <span>👤 ${escapeHTML(p.name)}</span>
+  <button class="remove" aria-label="حذف اللاعب"
+   onclick="removePlayer(${i})">×</button>
+ </div>`).join('');
+ $('playerCount').textContent=
+ `${players.length} لاعب${players.length===1?'':'ين'} مسجل`;
+}
+
+function removePlayer(i){
+ if(gameStarted)return;
+ players.splice(i,1);
+ renderPlayers();
+}
+
+document.querySelectorAll('#categorySetup .cat').forEach(btn=>{
+ btn.addEventListener('click',()=>{
+  document.querySelectorAll('#categorySetup .cat')
+   .forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  selectedCat=btn.dataset.cat;
+ });
+});
+
+function startGame(){
+ if(players.length<2){
+  alert('زيد جوج لاعبين على الأقل باش تبدا اللعبة 😄');return;
+ }
+ maxRounds=Number($('roundCount').value);
+ round=0;usedQuestions.clear();previousPairs.clear();
+ players.forEach(p=>p.score=0);
+ gameStarted=true;
+ showSection('game');
+ $('duelArea').classList.add('hidden');
+ renderScores();
+ updateProgress();
+}
+
+function showSection(id){
+ ['setup','game','votePanel','endPanel'].forEach(s=>{
+  $(s).classList.toggle('hidden',s!==id);
+ });
+}
+
+function shuffle(arr){
+ const a=[...arr];
+ for(let i=a.length-1;i>0;i--){
+  const j=Math.floor(Math.random()*(i+1));
+  [a[i],a[j]]=[a[j],a[i]];
+ }
+ return a;
+}
+
+function chooseDuel(){
+ if(!gameStarted)return;
+ if(round>=maxRounds){endGame();return;}
+ if(players.length<2){alert('خاص جوج لاعبين على الأقل.');return;}
+
+ const wheel=$('wheel');
+ wheel.classList.remove('spin');
+ void wheel.offsetWidth;
+ wheel.classList.add('spin');
+
+ const allPairs=[];
+ players.forEach(a=>players.forEach(b=>{
+  if(a.name!==b.name)allPairs.push([a.name,b.name]);
+ }));
+ let fresh=allPairs.filter(p=>!previousPairs.has(p.join('→')));
+ if(!fresh.length){
+  previousPairs.clear();
+  fresh=allPairs;
+ }
+ const pair=fresh[Math.floor(Math.random()*fresh.length)];
+ currentAsker=pair[0];currentAnswerer=pair[1];
+ previousPairs.add(pair.join('→'));
+
+ const eligible=bank.filter((q,i)=>
+  (selectedCat==='الكل'||q[0]===selectedCat)&&
+  (['خفيف','متوسط','جريء'].indexOf(q[1])<=
+   ['خفيف','متوسط','جريء'].indexOf($('level').value))&&
+  !usedQuestions.has(i)
+ );
+ let pool=eligible;
+ if(!pool.length){
+  usedQuestions.clear();
+  pool=bank.filter(q=>
+   (selectedCat==='الكل'||q[0]===selectedCat)&&
+   ['خفيف','متوسط','جريء'].indexOf(q[1])<=
+   ['خفيف','متوسط','جريء'].indexOf($('level').value)
+  );
+ }
+ if(!pool.length){
+  alert('ما بقاش سؤال بهاد الاختيارات. اختار فئة أخرى.');
+  return;
+ }
+
+ const q=pool[Math.floor(Math.random()*pool.length)];
+ const qi=bank.indexOf(q);
+ usedQuestions.add(qi);
+ currentQuestion=q;
+ $('asker').textContent=currentAsker;
+ $('answerer').textContent=currentAnswerer;
+ $('questionCategory').textContent=q[0]+' • '+q[1];
+ $('questionText').textContent=q[2];
+ $('duelArea').classList.remove('hidden');
+ $('modeLabel').textContent='🎲 اختيار عشوائي';
+ $('duelArea').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function skipQuestion(){
+ if(!gameStarted)return;
+ chooseDuel();
+}
+
+function nextRound(){
+ if(!currentQuestion){
+  alert('دور العجلة الأول باش تختار السؤال.');return;
+ }
+ const asker=players.find(p=>p.name===currentAsker);
+ const answerer=players.find(p=>p.name===currentAnswerer);
+ if(asker)asker.score++;
+ if(answerer)answerer.score++;
+ round++;
+ currentQuestion=null;
+ renderScores();
+ updateProgress();
+ $('duelArea').classList.add('hidden');
+ $('roundLabel').textContent=`الجولة ${Math.min(round+1,maxRounds)} من ${maxRounds}`;
+ if(round>=maxRounds){endGame();return;}
+ $('game').scrollIntoView({behavior:'smooth'});
+}
+
+function renderScores(){
+ $('scores').innerHTML=players
+ .slice().sort((a,b)=>b.score-a.score)
+ .map((p,i)=>`
+ <div class="scoreline">
+  <span>${i===0&&p.score>0?'👑 ':''}${escapeHTML(p.name)}</span>
+  <strong>${p.score} نقطة</strong>
+ </div>`).join('');
+}
+
+function updateProgress(){
+ $('progress').style.width=Math.min(100,round/maxRounds*100)+'%';
+ $('roundLabel').textContent=`الجولة ${Math.min(round+1,maxRounds)} من ${maxRounds}`;
+}
+
+function showVote(){
+ if(!gameStarted)return;
+ activeVote=true;
+ $('voteQuestion').textContent=
+ voteQuestions[Math.floor(Math.random()*voteQuestions.length)];
+ votes={};
+ $('voteStatus').textContent='كل لاعب يصوت مرة واحدة على اختيار المجموعة.';
+ $('voteOptions').innerHTML=players.map(p=>`
+  <button class="option vote-option" onclick="castVote('${escapeHTML(p.name).replace(/'/g,"&#39;")}')">
+   👤 ${escapeHTML(p.name)}
+  </button>`).join('');
+ showSection('votePanel');
+}
+
+function castVote(name){
+ if(!activeVote)return;
+ votes[name]=(votes[name]||0)+1;
+ $('voteStatus').textContent='تم تسجيل صوتك على '+name+' (تصويت تجريبي على نفس الجهاز).';
+ document.querySelectorAll('#voteOptions button').forEach(b=>b.disabled=true);
+ const winner=Object.entries(votes).sort((a,b)=>b[1]-a[1])[0];
+ if(winner){
+  const p=players.find(p=>p.name===winner[0]);
+  if(p)p.score++;
+  renderScores();
+  $('voteStatus').textContent=`🏆 حصل ${winner[0]} على صوت!`;
+ }
+ activeVote=false;
+}
+
+function closeVote(){
+ activeVote=false;
+ showSection('game');
+}
+
+function endGame(){
+ gameStarted=false;
+ activeVote=false;
+ const ranked=players.slice().sort((a,b)=>b.score-a.score);
+ $('winnerText').textContent=ranked.length?
+  `برافو ${ranked[0].name}! جمع ${ranked[0].score} نقطة 🎉`:'شكراً على اللعب!';
+ $('finalScores').innerHTML=ranked.map((p,i)=>`
+  <div class="scoreline">
+   <span>${i===0?'🥇':i===1?'🥈':i===2?'🥉':'👤'} ${escapeHTML(p.name)}</span>
+   <strong>${p.score} نقطة</strong>
+  </div>`).join('');
+ showSection('endPanel');
+}
+
+function restartGame(){
+ startGame();
+}
+
+function resetAll(){
+ players=[];
+ gameStarted=false;
+ round=0;
+ usedQuestions.clear();
+ previousPairs.clear();
+ renderPlayers();
+ showSection('setup');
+}
+</script>
 </body>
 </html>
